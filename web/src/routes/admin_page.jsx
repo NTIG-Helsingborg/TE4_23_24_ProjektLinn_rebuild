@@ -47,3 +47,12 @@ export const AdminPage = () => {
     </>
   );
 };
+
+/**
+ * @type {import('react-router-dom').RouteObject}
+ */
+// eslint-disable-next-line react-refresh/only-export-components
+export const adminRoute = {
+  path: "/admin",
+  element: <AdminPage />,
+};

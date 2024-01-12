@@ -6,10 +6,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.css";
 import { rootRoute } from "./routes/index.jsx";
 import { PocketbaseProvider } from "./components/PocketbaseProvider";
+import { adminRoute } from "./routes/admin_page";
 
 const queryClient = new QueryClient();
 
-const router = createBrowserRouter([rootRoute]);
+const router = createBrowserRouter([rootRoute, adminRoute]);
 
 
 
