@@ -9,7 +9,7 @@ export const AdminPage = () => {
         </div>
 
         <div className="j">
-          <h1>the preview screen from the main page will be displayed here</h1>
+          <h1> THE CONTAINER </h1>
         </div>
 
         <div className="container mt-8 flex ml-6 justify-end">
