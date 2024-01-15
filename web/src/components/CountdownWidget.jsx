@@ -22,11 +22,85 @@ export const CountdownWidget = () => {
         </div>
       </>
     );
+  }
+  else if (size === "1x2") {
+    return (
+      <>
+        <div className="countdownDiv aspect-[1/2] flex flex-col">
+          <div className="countdownTopTextDiv flex justify-center mt-10">
+            <h1 className="countdownTopText text-center text-8xl">Jul-Lan</h1>
+          </div>
+          <div className="countdownCountdownDiv flex-grow flex-col flex">
+            <table className="mt-40">
+              <tr>
+                <td>
+                  <h3 className="text-right text-[9rem] ml-[30%] font-bold">
+                    160
+                  </h3>
+                </td>
+                <td>
+                  <p className="text-6xl ml-10">Dagar</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
+                    15
+                  </h3>
+                </td>
+                <td>
+                  <p className="text-6xl ml-10">Timmar</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
+                    05
+                  </h3>
+                </td>
+                <td>
+                  <p className="text-6xl ml-10">Minuter</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
+                    38
+                  </h3>
+                </td>
+                <td>
+                  <p className="text-6xl ml-10">Sekunder</p>
+                </td>
+              </tr>
+            </table>
+            {/* <div className="flex flex-row w-full items-center mt-40">
+              <h3 className="text-[9rem] ml-[17%] font-bold">160</h3>
+              <p className="text-6xl ml-10">Dagar</p>
+            </div>
+            <div className="flex flex-row w-full items-center">
+              <h3 className="text-[9rem] ml-[17%] font-bold">15</h3>
+              <p className="text-6xl ml-10">Timmar</p>
+            </div>
+            <div className="flex flex-row w-full items-center">
+              <h3 className="text-[9rem] ml-[17%] font-bold">05</h3>
+              <p className="text-6xl ml-10">Minuter</p>
+            </div>
+            <div className="flex flex-row w-full items-center">
+              <h3 className="text-[9rem] ml-[17%] font-bold">38</h3>
+              <p className="text-6xl ml-10">Sekunder</p>
+            </div> */}
+          </div>
+          <div className="countdownFooter mb-10">
+            <img src={ntiLogo} alt="NTI Gymnasiet" className="mx-auto w-8/12" />
+          </div>
+        </div>
+      </>
+    );
   } else {
     return (
-      <div>
-        <h1>Something is wrong</h1>
-      </div>
+      <>
+        <h1>Something went wrong, gridsize does not exist</h1>
+      </>
     );
   }
 };
