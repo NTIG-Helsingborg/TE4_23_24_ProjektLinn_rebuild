@@ -1,12 +1,7 @@
-import { WidgetGridComponent } from "./WidgetGridComponent";
-import { WidgetsMainComponent } from "./WidgetsMainComponent";
-import { WidgetsInteractComponent } from "./WidgetsInteractComponent";
-
 export const DisplayContainer = () => {
   return (
     <>
-      <WidgetGridComponent />
-      <WidgetsMainComponent />
+      <p className="container p-10 text-center"> Display Container </p>
     </>
   );
 };
@@ -14,8 +9,7 @@ export const DisplayContainer = () => {
 export const EditContainer = () => {
   return (
     <>
-      <WidgetGridComponent />
-      <WidgetsInteractComponent />
+      <p className="container p-10 text-center"> Edit Container </p>
     </>
   );
 };
