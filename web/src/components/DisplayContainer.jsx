@@ -9,7 +9,9 @@ export const DisplayContainer = () => {
 export const EditContainer = () => {
   return (
     <>
-      <p className="container p-10 text-center"> Edit Container </p>
+      <div className="container mx-auto px-4 border-4 max-w-56">
+        <p className="container p-10 text-center"> Edit Container </p>
+      </div>
     </>
   );
 };

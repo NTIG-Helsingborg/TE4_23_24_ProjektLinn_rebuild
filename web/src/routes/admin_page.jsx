@@ -1,19 +1,18 @@
-import {
-  DisplayContainer,
-  EditContainer,
-} from "../components/DisplayContainer";
+import { AddWidgetButton } from "../components/AddWidgetButton";
+import { AddPageButton } from "../components/AddPageButton";
+import { EditContainer } from "../components/DisplayContainer";
 
 export const AdminPage = () => {
   return (
     <>
-      <h1 className="text-green-500 flex justify-start">RootRoute</h1>
       <div className="flex m-6">
         <div className="block w-48 justify-start">
           <div className="min-w-8">
             <p className="4">Tryck på + knappen för att lägga till en sida</p>
             <div className="flex justify-center items-center m-6">
+              <p>Sida 1</p>
               <svg
-                width="95"
+                width="150"
                 viewBox="0 0 302 520"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,61 +44,15 @@ export const AdminPage = () => {
               </svg>
             </div>
           </div>
-          <div className="flex justify-center items-center mt-6">
-            <button
-              title="Add New"
-              className="group cursor-pointer outline-none hover:rotate-90 duration-300 w-8 flex justify-center items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                className="stroke-purple-400 fill-none group-hover:fill-purple-800 group-active:stroke-purple-200 group-active:fill-purple-600 group-active:duration-0 duration-300"
-              >
-                <path
-                  d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-                  strokeWidth="1.5"
-                ></path>
-                <path d="M8 12H16" strokeWidth="1.5"></path>
-                <path d="M12 16V8" strokeWidth="1.5"></path>
-              </svg>
-            </button>
+          <div className="flex justify-center mt-6">
+            <AddPageButton />
           </div>
-        </div>
-        {/* THE DISPLAY CONTAINER */}
-        <div className="container mx-auto px-4 border-4 max-w-56">
-          <EditContainer />
         </div>
 
-        <div className="flex ml-6 justify-end">
-          <div className="grid ms:grid-cols-3 gap-x-2 gap-y-3 grid-flow-row-dense">
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-            <div className="bg-zinc-600 rounded-lg shadow-xl max-h-7 min-w-7 text-center">
-              +
-            </div>
-          </div>
+        <EditContainer />
+
+        <div className="flex justify-center items-center">
+          <AddWidgetButton />
         </div>
       </div>
     </>
