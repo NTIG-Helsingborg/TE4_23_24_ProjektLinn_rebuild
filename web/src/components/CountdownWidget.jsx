@@ -8,15 +8,15 @@ export const CountdownWidget = () => {
     return (
       <>
         <div className="countdownDiv aspect-square flex flex-col">
-          <div className="countdownTopTextDiv flex justify-center mt-4">
-            <h1 className="countdownTopText text-center text-5xl">Jul-Lan</h1>
+          <div className="countdownTopTextDiv flex justify-center mt-10">
+            <h1 className="countdownTopText text-center text-8xl">Jul-Lan</h1>
           </div>
           <div className="countdownCountdownDiv flex-grow flex items-center justify-center">
             <div className="countdownNumbers">
-              <p className="text-4xl font-bold">10:17:10:56</p>
+              <p className="text-[7rem] font-bold">10:17:10:56</p>
             </div>
           </div>
-          <div className="countdownFooter mb-4">
+          <div className="countdownFooter mb-10">
             <img src={ntiLogo} alt="NTI Gymnasiet" className="mx-auto w-8/12" />
           </div>
         </div>
