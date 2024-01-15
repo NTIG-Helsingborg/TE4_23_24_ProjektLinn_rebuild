@@ -4,15 +4,29 @@ import ntiLogo from "../assets/ntiLogo.svg";
 const size = "1x1";
 
 export const CountdownWidget = () => {
-  return (
-    <>
-      <div className="countdownTopTextDiv">
-        <h1 className="countdownTopText">{}Jul-Lan</h1>
+  if (size === "1x1") {
+    return (
+      <>
+        <div className="countdownDiv aspect-square flex flex-col">
+          <div className="countdownTopTextDiv flex justify-center mt-4">
+            <h1 className="countdownTopText text-center text-5xl">Jul-Lan</h1>
+          </div>
+          <div className="countdownCountdownDiv flex-grow flex items-center justify-center">
+            <div className="countdownNumbers">
+              <p className="text-4xl font-bold">10:17:10:56</p>
+            </div>
+          </div>
+          <div className="countdownFooter mb-4">
+            <img src={ntiLogo} alt="NTI Gymnasiet" className="mx-auto w-8/12" />
+          </div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <div>
+        <h1>Something is wrong</h1>
       </div>
-      <div className="countdownCountdownDiv"></div>
-      <div className="countdownFooter bottom-0 flex justify-center width: 100%;">
-        <img src={ntiLogo} alt="NTI Gymnasiet" />
-      </div>
-    </>
-  );
+    );
+  }
 };
