@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ntiLogo from "../assets/ntiLogo.svg";
 
 const size = "2x1";
+var daysLeft;
+var hoursLeft;
+var minutesLeft;
+var secondsLeft;
 
-export const CountdownWidget = ({data}) => {
-    const {datetime} = data
+export const CountdownWidget = ({ data }) => {
+  const { datetime } = data;
+  const receivedDate = new Date(datetime);
 
-    const yeet = new Date(datetime)
+  const [daysLeft, setDaysLeft] = useState(0);
+  const [hoursLeft, setHoursLeft] = useState(0);
+  const [minutesLeft, setMinutesLeft] = useState(0);
+  const [secondsLeft, setSecondsLeft] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getTimeLeft();
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  function getTimeLeft() {
+    const dateNow = new Date();
+    const timeDifference = receivedDate - dateNow;
+
+    setDaysLeft(Math.floor(timeDifference / (1000 * 60 * 60 * 24)));
+    setHoursLeft(
+      Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    );
+    setMinutesLeft(
+      Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
+    );
+    setSecondsLeft(Math.floor((timeDifference % (1000 * 60)) / 1000));
+  }
+  setInterval(getTimeLeft, 1000);
+
   if (size === "1x1") {
     return (
       <>
@@ -16,7 +48,9 @@ export const CountdownWidget = ({data}) => {
           </div>
           <div className="countdownCountdownDiv flex-grow flex items-center justify-center">
             <div className="countdownNumbers">
-              <p className="text-[7rem] font-bold">10:17:10:56</p>
+              <p className="text-[7rem] font-bold">
+                {daysLeft}:{hoursLeft}:{minutesLeft}:{secondsLeft}
+              </p>
             </div>
           </div>
           <div className="countdownFooter mb-10">
@@ -37,7 +71,7 @@ export const CountdownWidget = ({data}) => {
               <tr>
                 <td>
                   <h3 className="text-right text-[9rem] ml-[30%] font-bold">
-                    160
+                    {daysLeft}
                   </h3>
                 </td>
                 <td>
@@ -47,7 +81,7 @@ export const CountdownWidget = ({data}) => {
               <tr>
                 <td>
                   <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
-                    15
+                    {hoursLeft}
                   </h3>
                 </td>
                 <td>
@@ -57,7 +91,7 @@ export const CountdownWidget = ({data}) => {
               <tr>
                 <td>
                   <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
-                    05
+                    {minutesLeft}
                   </h3>
                 </td>
                 <td>
@@ -67,7 +101,7 @@ export const CountdownWidget = ({data}) => {
               <tr>
                 <td>
                   <h3 className="text-right	text-[9rem] ml-[30%] font-bold">
-                    38
+                    {secondsLeft}
                   </h3>
                 </td>
                 <td>
@@ -93,19 +127,19 @@ export const CountdownWidget = ({data}) => {
             <table className="table-fixed ml-[10%] mr-[10%]">
               <tr>
                 <td className="w-3/12">
-                  <h3 className="text-9xl font-semibold">160</h3>
+                  <h3 className="text-9xl font-semibold">{daysLeft}</h3>
                   <p className="text-2xl">Dagar</p>
                 </td>
                 <td className="w-3/12">
-                  <h3 className="text-9xl font-semibold">15</h3>
+                  <h3 className="text-9xl font-semibold">{hoursLeft}</h3>
                   <p className="text-2xl">Timmar</p>
                 </td>
                 <td className="w-3/12">
-                  <h3 className="text-9xl font-semibold">05</h3>
+                  <h3 className="text-9xl font-semibold">{minutesLeft}</h3>
                   <p className="text-2xl">Minuter</p>
                 </td>
                 <td className="w-3/12">
-                  <h3 className="text-9xl font-semibold">30</h3>
+                  <h3 className="text-9xl font-semibold">{secondsLeft}</h3>
                   <p className="text-2xl">Sekunder</p>
                 </td>
               </tr>
