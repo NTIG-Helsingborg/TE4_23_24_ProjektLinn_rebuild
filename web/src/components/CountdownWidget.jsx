@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import ntiLogo from "../assets/ntiLogo.svg";
 
 const size = "2x1";
-var daysLeft;
-var hoursLeft;
-var minutesLeft;
-var secondsLeft;
 
 export const CountdownWidget = ({ data }) => {
   const { datetime } = data;
@@ -28,16 +24,27 @@ export const CountdownWidget = ({ data }) => {
     const dateNow = new Date();
     const timeDifference = receivedDate - dateNow;
 
-    setDaysLeft(Math.floor(timeDifference / (1000 * 60 * 60 * 24)));
-    setHoursLeft(
-      Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const calculatedDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const calculatedHours = Math.floor(
+      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
-    setMinutesLeft(
-      Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60))
+    const calculatedMinutes = Math.floor(
+      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
     );
-    setSecondsLeft(Math.floor((timeDifference % (1000 * 60)) / 1000));
+    const calculatedSeconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    // Format values to always have two digits
+    const formattedDays = String(calculatedDays).padStart(2, "0");
+    const formattedHours = String(calculatedHours).padStart(2, "0");
+    const formattedMinutes = String(calculatedMinutes).padStart(2, "0");
+    const formattedSeconds = String(calculatedSeconds).padStart(2, "0");
+
+    setDaysLeft(formattedDays);
+    setHoursLeft(formattedHours);
+    setMinutesLeft(formattedMinutes);
+    setSecondsLeft(formattedSeconds);
   }
-  setInterval(getTimeLeft, 1000);
+  setInterval(getTimeLeft, 100);
 
   if (size === "1x1") {
     return (
