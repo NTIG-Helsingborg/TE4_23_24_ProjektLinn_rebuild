@@ -3,7 +3,10 @@ import ntiLogo from "../assets/ntiLogo.svg";
 
 const size = "2x1";
 
-export const CountdownWidget = () => {
+export const CountdownWidget = ({data}) => {
+    const {datetime} = data
+
+    const yeet = new Date(datetime)
   if (size === "1x1") {
     return (
       <>
