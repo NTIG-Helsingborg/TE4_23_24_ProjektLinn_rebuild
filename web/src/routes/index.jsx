@@ -1,3 +1,5 @@
+import { WeatherWidget } from '../components/weatherWidget'
+
 export const RootRoute = () => {
     return (
         <>

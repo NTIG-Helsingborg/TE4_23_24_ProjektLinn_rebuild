@@ -107,24 +107,60 @@ const weatherFetcher = async () => {
       26: snow,
       27: extremesnow,
     };
-
     return weather[weatherName];
   };
+
+  const getWeekDay = (dayvalue) => {
+    const day = {
+      0: "Söndag",
+      1: "Måndag",
+      2: "Tisdag",
+      3: "Onsdag",
+      4: "Torsdag",
+      5: "Fredag",
+      6: "Lördag",
+    };
+    return day[dayvalue];
+  };
   const daysAhead = [];
+  let Wsymb2;
+  let t;
+  let pmedian;
+  let ws;
+  let weekDay;
+  var futureDate = new Date();
 
   for (let index = 1; index < 7; index++) {
-    const day = {
-      weatherType: getWeatherType(
-        data.timeSeries[matchingIndex + index]?.parameters[18]?.values[0]
-      ),
-      medtemperature:
-        data.timeSeries[matchingIndex + index]?.parameters[10]?.values[0],
-      rainAmount:
-        data.timeSeries[matchingIndex + index]?.parameters[5]?.values[0],
-      windSpeed:
-        data.timeSeries[matchingIndex + index]?.parameters[14]?.values[0],
-    };
+    futureDate.setDate(currentTimeFetch.getDate() + index);
+    weekDay = getWeekDay(futureDate.getDay());
 
+    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+      if (parameter.name === "Wsymb2") {
+        Wsymb2 = parameter.values[0];
+      }
+    });
+    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+      if (parameter.name === "t") {
+        t = parameter.values;
+      }
+    });
+    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+      if (parameter.name === "pmedian") {
+        pmedian = parameter.values;
+      }
+    });
+    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+      if (parameter.name === "ws") {
+        ws = parameter.values;
+      }
+    });
+    const day = {
+      weekdays: weekDay,
+      futureweatherType: getWeatherType(Wsymb2),
+      medtemperature: t,
+      rainAmount: pmedian,
+      windSpeed: ws,
+    };
     daysAhead.push(day);
   }
   console.log(data);
@@ -137,39 +173,118 @@ const weatherFetcher = async () => {
     temperature: data.timeSeries[matchingIndex].parameters[10].values[0],
     windSpeed: data.timeSeries[matchingIndex].parameters[14].values[0],
     rainAmount: data.timeSeries[matchingIndex].parameters[5].values[0],
+    weekdays: getWeekDay(currentTimeFetch.getDay()),
     daysAhead: daysAhead,
   };
 };
-export const WeatherWidget = () => {
+export const WeatherWidget2x1 = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["weatherWidget"],
     refetchInterval: 3600 * 1000,
     queryFn: weatherFetcher,
   });
   if (isPending) return "Loading...";
-  console.log(data.daysAhead);
   if (error) return "An error has occurred: " + error.message;
+  const TodayWeatherIcon = data.weatherType;
+
   return (
     <div
-      className="bg-red-500 grid grid-cols-2 grid-rows-2"
-      style={{ width: "2000px", height: "900px" }}
+      className="bg-gradient-to-r from-indigo-500 to-indigo-900  text-white grid grid-cols-2 grid-rows-2"
+      style={{ width: "2000px", height: "900px", padding: "1%" }}
     >
-      <div className="flex justify-center  bg-blue-500">
+      <div className="flex justify-center  ">
         <div className="w-1/2 self-center">
-          <data.weatherType />
+          <TodayWeatherIcon />
         </div>
         <p className="text-9xl self-center">{data.temperature} °C</p>
       </div>
-      <div className="flex flex-row justify-center items-center bg-green-500">
+      <div className="flex flex-row justify-center items-center ">
         <div className="">
           <p className="text-2xl text-end">Helsingborg, Sverige</p>
           <table className="mx-auto border-separate border-spacing-x-10 h-1/6">
+            <tbody>
+              <tr>
+                <td>
+                  <p className="text-3xl text-center">Nederbörd</p>
+                </td>
+                <td>
+                  <p className="text-3xl text-center">Vind (Byar)</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p className="text-2xl text-center">{data.rainAmount} mm</p>
+                </td>
+                <td>
+                  <p className="text-2xl text-center">{data.windSpeed} m/s</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="col-span-2 gap-10 flex">
+        {data.daysAhead.map((day, index) => {
+          const { weekdays, medtemperature, rainAmount, windSpeed } = day;
+          const FutureWeatherIcon = day.futureweatherType;
+
+          return (
+            <div
+              key={index}
+              className="grid grid-col-1 rounded-xl w-2/12 bg-slate-800/25 text-center place-items-center"
+            >
+              <p className="text-4xl">{weekdays}</p>
+              <div className="w-1/2">
+                <FutureWeatherIcon />
+              </div>
+              <p className="text-3xl">{medtemperature} °C</p>
+              <div>
+                <p className="text-2xl">{rainAmount} mm</p>
+                <p className="text-2xl">{windSpeed} m/s</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export const WeatherWidget1x2 = () => {
+  const { isPending, error, data } = useQuery({
+    queryKey: ["weatherWidget"],
+    refetchInterval: 3600 * 1000,
+    queryFn: weatherFetcher,
+  });
+  if (isPending) return "Loading...";
+  if (error) return "An error has occurred: " + error.message;
+  const TodayWeatherIcon = data.weatherType;
+  return (
+    <div
+      className="bg-gradient-to-r from-indigo-500 to-indigo-900  text-white grid grid-col-1"
+      style={{ width: "900px", height: "2000px", padding: "1%"}}
+    >
+      <div className="flex justify-center" style={{marginTop:"10%"}}>
+        <p className="text-6xl">{data.weekdays}</p>
+      </div>
+      <div className=" flex justify-center self-center ">
+        <div className="w-3/12">
+          <TodayWeatherIcon />
+        </div>
+        <p className="text-9xl self-center">{data.temperature} °C</p>
+      </div>
+      <div className="flex justify-center">
+        <p className="text-2xl">Helsingborg, Sverige</p>
+      </div>
+      <div>
+        <table className="mx-auto border-separate border-spacing-x-20 h-1/6">
+          <tbody>
             <tr>
               <td>
-                <p className="text-3xl text-center">Nederbörd</p>
+                <p className="text-3xl text-center">Nederbörd:</p>
               </td>
               <td>
-                <p className="text-3xl text-center">Vind (Byar)</p>
+                <p className="text-3xl text-center">Vindhastighet:</p>
               </td>
             </tr>
             <tr>
@@ -180,19 +295,31 @@ export const WeatherWidget = () => {
                 <p className="text-2xl text-center">{data.windSpeed} m/s</p>
               </td>
             </tr>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
-      <div className="col-span-2 flex">
-        {data.daysAhead.map((day, index) => (
-          <div key={index} className="flex-rows bg-yellow-500 w-2/12">
-            <p>test</p>
-            < day.weatherType/> 
-            <p>{day.medtemperature}</p>
-            <p>{day.rainAmount}</p>
-            <p>{day.windSpeed}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-3 grid-rows-2 gap-10" style={{marginBottom:"10%"}}>
+        {data.daysAhead.map((day, index) => {
+          const { weekdays, medtemperature, rainAmount, windSpeed } = day;
+          const FutureWeatherIcon = day.futureweatherType;
+
+          return (
+            <div
+              key={index}
+              className="grid grid-col-1 rounded-xl bg-slate-800/25 text-center place-items-center"
+            >
+              <p className="text-4xl">{weekdays}</p>
+              <div className="w-1/2">
+                <FutureWeatherIcon />
+              </div>
+              <p className="text-3xl">{medtemperature} °C</p>
+              <div>
+                <p className="text-2xl">{rainAmount} mm</p>
+                <p className="text-2xl">{windSpeed} m/s</p>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
