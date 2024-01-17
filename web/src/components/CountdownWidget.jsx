@@ -44,7 +44,6 @@ export const CountdownWidget = ({ data }) => {
     setMinutesLeft(formattedMinutes);
     setSecondsLeft(formattedSeconds);
   }
-  setInterval(getTimeLeft, 100);
 
   if (size === "1x1") {
     return (
