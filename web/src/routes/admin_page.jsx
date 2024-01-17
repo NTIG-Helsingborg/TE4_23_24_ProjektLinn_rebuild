@@ -1,6 +1,7 @@
 import { AddWidgetButton } from "../components/AddWidgetButton";
 import { AddPageButton } from "../components/AddPageButton";
 import { EditContainer } from "../components/DisplayContainer";
+import { SlideTimer } from "../components/SlideTimer.jsx";
 
 export const AdminPage = () => {
   return (
@@ -8,11 +9,12 @@ export const AdminPage = () => {
       <div className="flex m-6">
         <div className="block w-48 justify-start">
           <div className="min-w-8">
-            <p className="4">Tryck på + knappen för att lägga till en sida</p>
+            <p className="flex justify-center items-center m-6">
+              <SlideTimer />
+            </p>
             <div className="flex justify-center items-center m-6">
-              <p>Sida 1</p>
               <svg
-                width="150"
+                width="250"
                 viewBox="0 0 302 520"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -44,16 +46,13 @@ export const AdminPage = () => {
               </svg>
             </div>
           </div>
-          <div className="flex justify-center mt-6">
-            <AddPageButton />
-          </div>
+
+          <AddPageButton />
         </div>
 
         <EditContainer />
 
-        <div className="flex justify-center items-center">
-          <AddWidgetButton />
-        </div>
+        <AddWidgetButton />
       </div>
     </>
   );
