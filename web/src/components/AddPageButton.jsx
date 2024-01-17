@@ -7,7 +7,7 @@ export const AddPageButton = () => {
   const newSlideMutation = useNewSlide();
   const { data: layouts } = useLayouts();
 
-  const { data: widgets } = useWidgets();
+  const { data: widgets } = useWidgets("uhogboqzsjui7pw");
 
   if (!layouts) return <div>Loading</div>;
 
@@ -15,7 +15,7 @@ export const AddPageButton = () => {
     <div className="flex justify-center mt-6">
       <button
         title="Add New"
-        className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group hover:rotate-45"
+        className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group hover:rotate-90"
         onClick={() =>
           newSlideMutation.mutate({
             layout: layouts[0].id,
