@@ -7,7 +7,7 @@ import { createContext, useContext } from "react";
 /**
  * Represents a strict record model with required properties.
  */
-type StrictRecordModel<Expand extends Record<string, any> | undefined = undefined> = {
+export type StrictRecordModel<Expand extends Record<string, any> | undefined = undefined> = {
     id: string;
     created_at: string;
     updated_at: string;
