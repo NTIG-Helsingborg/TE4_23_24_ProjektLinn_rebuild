@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const SlideTimer = () => {
   const [minutes, setMinutes] = useState(0);
@@ -56,9 +56,9 @@ export const SlideTimer = () => {
     <>
       <div className="">
         <div className="grid grid-cols-2 gap-4">
-          <div className="justify-center items-center space-x-4">
+          <div className="justify-center items-center space-x-4 ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
             <span>Min</span>
-            <div className="max-w-5">
+            <div className="max-w-5 float-right ring ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
               <input
                 ref={minutesInputRef}
                 type="number"
@@ -68,9 +68,9 @@ export const SlideTimer = () => {
               />
             </div>
           </div>
-          <div className="justify-center items-center space-x-4">
+          <div className="justify-center items-center space-x-4  ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
             <span>Sec</span>
-            <div className="max-w-5">
+            <div className="max-w-5 float-right ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
               <input
                 ref={secondsInputRef}
                 type="number"
@@ -81,12 +81,27 @@ export const SlideTimer = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center space-x-4">
-          <button onClick={startTimer}>Start</button>
-          <button onClick={stopTimer}>Stop</button>
-          <button onClick={resetTimer}>Reset</button>
+        <div className="flex justify-center items-center space-x-4 mt-6 ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
+          <button
+            onClick={startTimer}
+            className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl hover:scale-110 text-white min-width-fit"
+          >
+            Start
+          </button>
+          <button
+            onClick={stopTimer}
+            className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl hover:scale-110 text-white min-width-fit"
+          >
+            Stop
+          </button>
+          <button
+            onClick={resetTimer}
+            className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl hover:scale-110 text-white min-width-fit"
+          >
+            Reset
+          </button>
         </div>
-        <div className="flex justify-center items-center mt-1">
+        <div className="flex justify-center items-center mt-6 ring ring-purple-600 bg-zinc-600 rounded-lg shadow-xl">
           <h1>
             {" "}
             Timer {minutes} : {seconds < 10 ? `0${seconds}` : seconds}{" "}

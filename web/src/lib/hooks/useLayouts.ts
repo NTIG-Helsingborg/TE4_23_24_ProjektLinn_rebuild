@@ -12,6 +12,7 @@ import {
  * Custom hook for fetching slides data from the server.
  * @returns The data fetched from the server.
  */
+
 export const useLayouts = () => {
     const pbClient = usePocketbase();
 

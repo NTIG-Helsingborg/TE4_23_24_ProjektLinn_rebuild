@@ -1,16 +1,11 @@
 import { useLayouts } from "../lib/hooks/useLayouts";
 import { useNewSlide } from "../lib/hooks/useSlides";
-import { useWidgets } from "../lib/hooks/useWidgets";
 
-export const AddPageButton = () => {
-  // Create slide
+export const AddSlideButton = () => {
   const newSlideMutation = useNewSlide();
   const { data: layouts } = useLayouts();
 
-  const { data: widgets } = useWidgets("uhogboqzsjui7pw");
-
-  if (!layouts) return <div>Loading</div>;
-
+  if (!layouts) return <div> Loading... </div>;
   return (
     <div className="flex justify-center mt-6">
       <button

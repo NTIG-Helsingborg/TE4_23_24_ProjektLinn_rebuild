@@ -12,6 +12,7 @@ import {
  * Custom hook for fetching slides data.
  * @returns {QueryResult} The result of the query.
  */
+
 export const useSlides = () => {
     const pbClient = usePocketbase();
 
@@ -33,6 +34,7 @@ export const useSlides = () => {
  * Custom hook for creating a new slide.
  * @returns The mutation data for creating a new slide.
  */
+
 export const useNewSlide = () => {
     const pbClient = usePocketbase();
 
@@ -45,6 +47,5 @@ export const useNewSlide = () => {
             return newSlide;
         },
     });
-
     return data;
 }
