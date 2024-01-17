@@ -55,7 +55,7 @@ export const CountdownWidget = ({ data }) => {
           </div>
           <div className="countdownCountdownDiv flex-grow flex items-center justify-center">
             <div className="countdownNumbers">
-              <p className="text-[7rem] font-bold">
+              <p className="text-[13rem] font-bold">
                 {daysLeft}:{hoursLeft}:{minutesLeft}:{secondsLeft}
               </p>
             </div>
