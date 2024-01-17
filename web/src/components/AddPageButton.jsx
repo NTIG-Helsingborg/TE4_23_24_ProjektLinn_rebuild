@@ -1,21 +1,41 @@
+import { useLayouts } from "../lib/hooks/useLayouts";
+import { useNewSlide } from "../lib/hooks/useSlides";
+import { useWidgets } from "../lib/hooks/useWidgets";
+
 export const AddPageButton = () => {
+  // Create slide
+  const newSlideMutation = useNewSlide();
+  const { data: layouts } = useLayouts();
+
+  const { data: widgets } = useWidgets();
+
+  if (!layouts) return <div>Loading</div>;
+
   return (
-    <button
-      title="Add New"
-      className="group cursor-pointer outline-none hover:rotate-90 duration-300 w-8 flex justify-center items-center"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        className="stroke-purple-400 fill-none group-hover:fill-purple-800 group-active:stroke-purple-200 group-active:fill-purple-600 group-active:duration-0 duration-300"
+    <div className="flex justify-center mt-6">
+      <button
+        title="Add New"
+        className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group hover:rotate-45"
+        onClick={() =>
+          newSlideMutation.mutate({
+            layout: layouts[0].id,
+            interval: 30,
+          })
+        }
       >
-        <path
-          d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
-          strokeWidth="1.5"
-        ></path>
-        <path d="M8 12H16" strokeWidth="1.5"></path>
-        <path d="M12 16V8" strokeWidth="1.5"></path>
-      </svg>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          className="duration-300 stroke-purple-400 fill-none group-hover:fill-purple-800 group-active:stroke-purple-200 group-active:fill-purple-600 group-active:duration-0"
+        >
+          <path
+            d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"
+            strokeWidth="1.5"
+          ></path>
+          <path d="M8 12H16" strokeWidth="1.5"></path>
+          <path d="M12 16V8" strokeWidth="1.5"></path>
+        </svg>
+      </button>
+    </div>
   );
 };
