@@ -7,7 +7,7 @@ export const AddWidgetButton = () => {
   return (
     <>
       {/* använd col-span/row-span-2,3,4,5,6,7,8 for att ändra storlek på celler for widgets */}
-      <div className="flex justify-center items-center">
+      <div className="grid place-items-center w-[30vw]">
         <div className="grid grid-cols-3 gap-x-3 gap-y-3 grid-flow-row-dense">
           {widgetsFromDB.map((widget, index) => {
             return (

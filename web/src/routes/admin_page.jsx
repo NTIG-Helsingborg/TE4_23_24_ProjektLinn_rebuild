@@ -28,17 +28,17 @@ export const AdminPage = () => {
 
   return (
     <>
-      <div className="flex m-6">
+      <div className="flex h-[100vh] w-[100vw] p-6 justify-between">
         {/* Slide list */}
-        <div className="block w-[15vw] justify-start">
-          <div className="grid grid-cols-1 place-items-center min-w-8">
+        <div className="flex flex-col justify-between w-[15vw] h-full overflow-y-auto pb-8">
+          <div className="flex flex-col ">
             {/* <p className="flex justify-center items-center">
               <SlideTimer />
             </p> */}
 
             {slides && slides.length > 0 ? (
               slides.map((slide) => (
-                <div key={slide.id} className="grid">
+                <div key={slide.id} className="grid py-4 ">
                   <SlideObject id={slide.id} layout={slide.layoutID} />
                 </div>
               ))
@@ -48,10 +48,10 @@ export const AdminPage = () => {
           </div>
 
           {/* Add Slide Button */}
-          <div className="flex justify-center mt-6">
+          <div className="absolute bottom-6 w-[15vw] bg-white flex justify-center">
             <button
               title="Add New"
-              className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group hover:rotate-90"
+              className="flex items-center justify-center w-10 h-10 my-2 duration-300 outline-none cursor-pointer group hover:rotate-90"
               onClick={() => {
                 setlayoutSelectToggle(!layoutSelectToggle);
               }}
@@ -73,11 +73,13 @@ export const AdminPage = () => {
         </div>
 
         {/* Preview + Edit*/}
-        <EditContainer />
+        <div className="container px-4 border-4 w-[35vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
+          <EditContainer />
+        </div>
 
         {/* Layout selector popup */}
         {layoutSelectToggle && (
-          <div className="grid h-[100vh] fixed top-6 right-6 bg-black bg-opacity-50">
+          <div className="grid z-10 fixed top-6 right-6 w-[35vw] h-[calc(100%-theme(space.12))] bg-black text-white rounded-[12px]">
             <button onClick={() => addSlide(0)}> Layout bild </button>
             <button onClick={() => addSlide(1)}> Layout bild </button>
             <button onClick={() => addSlide(2)}> Layout bild </button>
