@@ -1,22 +1,28 @@
-import { useLayouts } from "../lib/hooks/useLayouts";
+/* eslint-disable react/prop-types */
 import { useNewSlide } from "../lib/hooks/useSlides";
 
-export const AddSlideButton = () => {
+export const AddSlideButton = ({ layoutID }) => {
   const newSlideMutation = useNewSlide();
-  const { data: layouts } = useLayouts();
 
-  if (!layouts) return <div> Loading... </div>;
+  // if (!layouts) return <div> Loading... </div>;
   return (
     <div className="flex justify-center mt-6">
       <button
         title="Add New"
         className="flex items-center justify-center w-8 duration-300 outline-none cursor-pointer group hover:rotate-90"
-        onClick={() =>
-          newSlideMutation.mutate({
-            layout: layouts[0].id,
-            interval: 30,
-          })
-        }
+        onClick={() => {
+          newSlideMutation.mutate(
+            {
+              layout: layoutID /* layouts[0].id */,
+              interval: 30,
+            },
+            {
+              onSuccess: () => {
+                location.reload();
+              },
+            }
+          );
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

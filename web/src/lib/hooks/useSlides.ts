@@ -49,3 +49,17 @@ export const useNewSlide = () => {
     });
     return data;
 }
+
+export const useDeleteSlide = () => {
+    const pbClient = usePocketbase();
+
+    const data = useMutation({
+        mutationFn: async (slideID: string) => {
+            await pbClient
+                .collection('slides')
+                .delete(slideID);
+        },
+    });
+
+    return data;
+};

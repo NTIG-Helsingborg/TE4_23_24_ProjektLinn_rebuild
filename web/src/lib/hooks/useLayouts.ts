@@ -19,11 +19,11 @@ export const useLayouts = () => {
     const data = useQuery({
         queryKey: ["layouts"],
         queryFn: async () => {
-            const slides = await pbClient
+            const layouts = await pbClient
                 .collection("layouts")
                 .getFullList();
 
-            return slides;
+            return layouts;
         },
     });
 
