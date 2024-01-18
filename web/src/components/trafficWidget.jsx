@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, } from 'react';
 
 export let divId;
 
 const TrafficWidget = ({divId}) => {
-    const [colorChange, setColorChange] = useState("bg-green-500");
-    const [busType, setBusType] = useState("Stadsbuss");
-  
+   
     
     let busLines = [
         { line: '1', destination: 'Ramlösa', departure: '2' },
@@ -44,11 +42,13 @@ const TrafficWidget = ({divId}) => {
       var yellowbus = busLines.filter((busLine) => [ '9', '11', '12', '26'].includes(busLine.line));
    
       const [lineType, setLineType] = useState(greenbus);
-
+      const [colorChange, setColorChange] = useState("bg-green-500");
+      const [busType, setBusType] = useState("Stadsbuss");
+    
                 
       
-        
-    
+      
+    //creates the rotate effect on the bus widget
             useEffect(() => {
                
                
@@ -69,28 +69,31 @@ const TrafficWidget = ({divId}) => {
                 }, 5000); // Update the current time every 5 seconds
 
 
-
-
                 return () => {
                     clearInterval(interval);
                 };
+
+
             }, [colorChange, busType, lineType]);
 
+            
+         
 
+//thischanges info in widget depending on what divId is sent in
         var Buss = "Regionbuss";
         var  BussColor = "bg-yellow-500"
     
        var divId = divId;
       
-        if (divId === 1) {
+        if (divId === "stad") {
             BussColor = "bg-green-500";
             Buss = "Stadsbuss";
            busLines = greenbus;
-        } else if (divId === 2) {
+        } else if (divId === "region") {
             BussColor = "bg-yellow-500";
             Buss = "Regionbuss";
             busLines = yellowbus;
-        } else if (divId === 3) {
+        } else if (divId === "rotate") {
         
           BussColor = colorChange;
           Buss = busType;
@@ -116,9 +119,7 @@ const TrafficWidget = ({divId}) => {
                     </div>
                 </div>
            
-
-
-             </div>
+            </div>
           
                
 
