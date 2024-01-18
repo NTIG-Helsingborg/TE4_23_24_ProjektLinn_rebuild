@@ -63,7 +63,6 @@ export const SlideGrid = ({ slideId }) => {
         <Grid>
             {data &&
                 data.map((slot, index) => {
-                    slot.data
                     return (
                         <div
                             key={index}
