@@ -54,10 +54,10 @@ export interface Widget extends StrictRecordModel {
 /**
  * Represents a widget record model.
  */
-export interface Event extends StrictRecordModel {
+export interface Skanetrafiken extends StrictRecordModel {
     // slide: string;
-    // type: string;
-    // data: any;
+    type: string;
+    data: any;
     // Add your properties here for event
 }
 
@@ -77,7 +77,7 @@ interface TypedPocketBase extends PocketBase {
     collection(idOrName: "layout_items"): RecordService<LayoutItem>;
     collection(idOrName: "slides"): RecordService<Slide>;
     collection(idOrName: "widgets"): RecordService<Widget>;
-    collection(idOrName: "events"): RecordService<Event>;
+    collection(idOrName: "skanetrafiken"): RecordService<Skanetrafiken>;
 }
 
 const pocketBaseClient = new PocketBase(
