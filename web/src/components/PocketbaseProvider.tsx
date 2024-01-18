@@ -77,7 +77,7 @@ interface TypedPocketBase extends PocketBase {
     collection(idOrName: "layout_items"): RecordService<LayoutItem>;
     collection(idOrName: "slides"): RecordService<Slide>;
     collection(idOrName: "widgets"): RecordService<Widget>;
-    collection(idOrName: "skanetrafiken"): RecordService<Skanetrafiken>;
+    collection(idOrName: "misc"): RecordService<Misc>;
 }
 
 const pocketBaseClient = new PocketBase(
