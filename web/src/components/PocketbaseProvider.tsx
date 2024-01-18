@@ -38,7 +38,8 @@ export interface LayoutItem extends StrictRecordModel {
  * Represents a slide record model.
  */
 export interface Slide extends StrictRecordModel {
-    layout: string;
+    layoutID: number;
+    index: number;
     interval: number;
 }
 

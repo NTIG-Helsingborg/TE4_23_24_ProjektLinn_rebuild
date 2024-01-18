@@ -4,11 +4,27 @@ import { EditContainer } from "../components/DisplayContainer";
 import { SlideTimer } from "../components/SlideTimer.jsx";
 import { SlideObject } from "../components/SlideObject";
 import { useSlides } from "../lib/hooks/useSlides";
+import { useNewSlide } from "../lib/hooks/useSlides";
 
 export const AdminPage = () => {
+  const newSlideMutation = useNewSlide();
   const { data: slides } = useSlides();
-  const [layoutSelectToggle, setlayoutSelectToggle] = useState(true);
-  const layoutID = 0;
+  const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
+
+  async function addSlide(id) {
+    newSlideMutation.mutate(
+      {
+        layoutID: id,
+        index: 0,
+        interval: 30,
+      },
+      {
+        onSuccess: () => {
+          location.reload();
+        },
+      }
+    );
+  }
 
   return (
     <>
@@ -16,14 +32,14 @@ export const AdminPage = () => {
         {/* Slide list */}
         <div className="block w-[15vw] justify-start">
           <div className="grid grid-cols-1 place-items-center min-w-8">
-            <p className="flex justify-center items-center m-6">
+            {/* <p className="flex justify-center items-center">
               <SlideTimer />
-            </p>
+            </p> */}
 
             {slides && slides.length > 0 ? (
               slides.map((slide) => (
                 <div key={slide.id} className="grid">
-                  <SlideObject id={slide.id} layout={layoutID} />
+                  <SlideObject id={slide.id} layout={slide.layoutID} />
                 </div>
               ))
             ) : (
@@ -61,10 +77,10 @@ export const AdminPage = () => {
 
         {/* Layout selector popup */}
         {layoutSelectToggle && (
-          <div className="grid h-[100vh] fixed top-6 right-6 bg-black bg-opacity-10">
-            <button> Layout bild </button>
-            <button> Layout bild </button>
-            <button> Layout bild </button>
+          <div className="grid h-[100vh] fixed top-6 right-6 bg-black bg-opacity-50">
+            <button onClick={() => addSlide(0)}> Layout bild </button>
+            <button onClick={() => addSlide(1)}> Layout bild </button>
+            <button onClick={() => addSlide(2)}> Layout bild </button>
           </div>
         )}
 
