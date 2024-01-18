@@ -63,6 +63,7 @@ export const SlideGrid = ({ slideId }) => {
         <Grid>
             {data &&
                 data.map((slot, index) => {
+                    slot.data
                     return (
                         <div
                             key={index}
@@ -75,6 +76,7 @@ export const SlideGrid = ({ slideId }) => {
                             }}
                         >
                             {index}
+                            {/* <Widget type={slot.type} data={slot.data} /> */}
                         </div>
                     );
                 })}
@@ -83,3 +85,13 @@ export const SlideGrid = ({ slideId }) => {
         </Grid>
     );
 };
+
+// const widgets = {
+//     'countdown': CountdownWidget
+// }
+
+// const Widget = ({ type, data }) => {
+//     const component = widgets[type]
+//     if (!component) return <div>Widget not found</div>
+//     return component({ data })
+// }
