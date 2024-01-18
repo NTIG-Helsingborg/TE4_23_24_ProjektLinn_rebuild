@@ -54,7 +54,7 @@ export interface Widget extends StrictRecordModel {
 /**
  * Represents a widget record model.
  */
-export interface Skanetrafiken extends StrictRecordModel {
+export interface Misc extends StrictRecordModel {
     // slide: string;
     type: string;
     data: any;
