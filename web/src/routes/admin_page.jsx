@@ -6,6 +6,12 @@ import { SlideObject } from "../components/SlideObject";
 import { useSlides } from "../lib/hooks/useSlides";
 import { useNewSlide } from "../lib/hooks/useSlides";
 
+// NoJustify = "flex flex-col w-[15vw] h-full pb-16"
+// YesJusyify = "flex flex-col w-[15vw] h-full pb-16 justify-center"
+// get element hight
+// if element hight > 100% = {NoJustify}
+// else {YesJustify}
+
 export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
   const { data: slides } = useSlides();
@@ -30,8 +36,8 @@ export const AdminPage = () => {
     <>
       <div className="flex h-[100vh] w-[100vw] p-6 justify-between">
         {/* Slide list */}
-        <div className="flex flex-col justify-between w-[15vw] h-full overflow-y-auto pb-8">
-          <div className="flex flex-col ">
+        <div className="flex flex-col w-[15vw] h-full pb-16">
+          <div className="flex flex-col overflow-y-auto">
             {/* <p className="flex justify-center items-center">
               <SlideTimer />
             </p> */}
@@ -73,13 +79,13 @@ export const AdminPage = () => {
         </div>
 
         {/* Preview + Edit*/}
-        <div className="container px-4 border-4 w-[35vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
+        <div className="px-4 border-4 w-[35vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
         </div>
 
         {/* Layout selector popup */}
         {layoutSelectToggle && (
-          <div className="grid z-10 fixed top-6 right-6 w-[35vw] h-[calc(100%-theme(space.12))] bg-black text-white rounded-[12px]">
+          <div className="grid z-10 fixed top-6 right-6 w-[30vw] h-[calc(100%-theme(space.12))] bg-black text-white rounded-[12px]">
             <button onClick={() => addSlide(0)}> Layout bild </button>
             <button onClick={() => addSlide(1)}> Layout bild </button>
             <button onClick={() => addSlide(2)}> Layout bild </button>
