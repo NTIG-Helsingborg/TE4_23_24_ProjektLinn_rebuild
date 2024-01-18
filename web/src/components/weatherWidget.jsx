@@ -30,28 +30,27 @@ const weatherFetcher = async () => {
 
   const currentTime = currentTimeSplit[4];
   const closestHour = currentTime.split(":")[0].padStart(2, "0"); // Makes sure single digit hours are padded with a 0
-  const currentMonth = currentTimeSplit[1];
 
   const getMonthNumber = (monthName) => {
     // Translates the month name into a number
     const months = {
-      Jan: "01",
-      Feb: "02",
-      Mar: "03",
-      Apr: "04",
-      May: "05",
-      Jun: "06",
-      Jul: "07",
-      Aug: "08",
-      Sep: "09",
-      Oct: "10",
-      Nov: "11",
-      Dec: "12",
+      0: "01",
+      1: "02",
+      2: "03",
+      3: "04",
+      4: "05",
+      5: "06",
+      6: "07",
+      7: "08",
+      8: "09",
+      9: "10",
+      10: "11",
+      11: "12",
     };
 
     return months[monthName];
   };
-  const monthNumber = getMonthNumber(currentMonth);
+  const monthNumber = getMonthNumber(currentTimeFetch.getMonth());
   // Convert all the values into a string with the API format
   const searchTime =
     currentTimeSplit[3] +
@@ -63,7 +62,7 @@ const weatherFetcher = async () => {
     closestHour +
     ":00:00Z";
 
-  // Compare searchTime to the API's timeSeries array and find the matching index to see exactly what data is available for the current time
+    // Compare searchTime to the API's timeSeries array and find the matching index to see exactly what data is available for the current time
   let matchingIndex = -1;
 
   data.timeSeries.forEach((timeSeries, index) => {
@@ -122,6 +121,7 @@ const weatherFetcher = async () => {
     };
     return day[dayvalue];
   };
+
   const daysAhead = [];
   let Wsymb2;
   let t;
@@ -129,33 +129,58 @@ const weatherFetcher = async () => {
   let ws;
   let weekDay;
   var futureDate = new Date();
+  futureDate.setHours(12, 0, 0, 0);
+
+  let futureDateIndex = -1;
 
   for (let index = 1; index < 7; index++) {
     futureDate.setDate(currentTimeFetch.getDate() + index);
     weekDay = getWeekDay(futureDate.getDay());
 
-    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+    var futureDateSearch =
+      futureDate.getFullYear() +
+      "-" +
+      getMonthNumber(futureDate.getMonth()) +
+      "-" +
+      futureDate.getDate() +
+      "T" +
+      futureDate.getHours() +
+      ":00:00Z";
+
+    data.timeSeries.forEach((timeSeries, index) => {
+      if (timeSeries.validTime === futureDateSearch) {
+        futureDateIndex = index;
+        return;
+      }
+    });
+    if (futureDateIndex === -1) {
+      throw new Error(`No matching data found for futureDateSearch: ${searchTime}`);
+    }
+
+    data.timeSeries[futureDateIndex].parameters.forEach((parameter) => {
       if (parameter.name === "Wsymb2") {
         Wsymb2 = parameter.values[0];
       }
     });
-    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+    data.timeSeries[futureDateIndex].parameters.forEach((parameter) => {
       if (parameter.name === "t") {
         t = parameter.values;
       }
     });
-    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+    data.timeSeries[futureDateIndex].parameters.forEach((parameter) => {
       if (parameter.name === "pmedian") {
         pmedian = parameter.values;
       }
     });
-    data.timeSeries[matchingIndex + index].parameters.forEach((parameter) => {
+    data.timeSeries[futureDateIndex].parameters.forEach((parameter) => {
       if (parameter.name === "ws") {
         ws = parameter.values;
       }
     });
+
     const day = {
       weekdays: weekDay,
+      date: futureDate.getDate(),
       futureweatherType: getWeatherType(Wsymb2),
       medtemperature: t,
       rainAmount: pmedian,
@@ -163,6 +188,7 @@ const weatherFetcher = async () => {
     };
     daysAhead.push(day);
   }
+
   console.log(data);
   return {
     currentTime,
@@ -225,7 +251,7 @@ export const WeatherWidget2x1 = () => {
       </div>
       <div className="col-span-2 gap-10 flex">
         {data.daysAhead.map((day, index) => {
-          const { weekdays, medtemperature, rainAmount, windSpeed } = day;
+          const { weekdays, medtemperature, rainAmount, windSpeed, date } = day;
           const FutureWeatherIcon = day.futureweatherType;
 
           return (
@@ -233,6 +259,7 @@ export const WeatherWidget2x1 = () => {
               key={index}
               className="grid grid-col-1 rounded-xl w-2/12 bg-slate-800/25 text-center place-items-center"
             >
+              <p>{date}</p>
               <p className="text-4xl">{weekdays}</p>
               <div className="w-1/2">
                 <FutureWeatherIcon />
@@ -261,10 +288,10 @@ export const WeatherWidget1x2 = () => {
   const TodayWeatherIcon = data.weatherType;
   return (
     <div
-      className="bg-gradient-to-r from-indigo-500 to-indigo-900  text-white grid grid-col-1"
-      style={{ width: "900px", height: "2000px", padding: "1%"}}
+      className="bg-gradient-to-br from-indigo-500 to-indigo-900  text-white grid grid-col-1"
+      style={{ width: "900px", height: "2000px", padding: "1%" }}
     >
-      <div className="flex justify-center" style={{marginTop:"10%"}}>
+      <div className="flex justify-center" style={{ marginTop: "10%" }}>
         <p className="text-6xl">{data.weekdays}</p>
       </div>
       <div className=" flex justify-center self-center ">
@@ -298,7 +325,10 @@ export const WeatherWidget1x2 = () => {
           </tbody>
         </table>
       </div>
-      <div className="grid grid-cols-3 grid-rows-2 gap-10" style={{marginBottom:"10%"}}>
+      <div
+        className="grid grid-cols-3 grid-rows-2 gap-10"
+        style={{ marginBottom: "10%" }}
+      >
         {data.daysAhead.map((day, index) => {
           const { weekdays, medtemperature, rainAmount, windSpeed } = day;
           const FutureWeatherIcon = day.futureweatherType;
