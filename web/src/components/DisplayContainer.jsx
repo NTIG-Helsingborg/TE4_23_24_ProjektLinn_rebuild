@@ -1,11 +1,18 @@
+import { DisplayFooter } from "./DisplayHeaderFooter";
+import { DisplayHeader } from "./DisplayHeaderFooter";
+
 export const DisplayContainer = () => {
   return (
     <>
-      <p className="container p-10 text-center"> Display Container </p>
+      <DisplayHeader />
+      <p className="container p-10 text-center bg-white "> Display Container </p>
+      <DisplayFooter />
     </>
   );
 };
 
+
+// Ebba inte röra 
 export const EditContainer = () => {
   return (
     <>
