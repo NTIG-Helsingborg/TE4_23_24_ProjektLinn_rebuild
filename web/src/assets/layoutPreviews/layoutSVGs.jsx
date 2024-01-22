@@ -1,11 +1,12 @@
 export const Layout1SVG = () => {
   return (
     <svg
-      width="302"
-      height="520"
+      // width="302"
+      // height="520"
       viewBox="0 0 302 520"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="w-full h-full"
     >
       <path
         d="M0 43C0 19.2518 19.2518 0 43 0H259C282.748 0 302 19.2518 302 43V477C302 500.748 282.748 520 259 520H43C19.2518 520 0 500.748 0 477V43Z"
