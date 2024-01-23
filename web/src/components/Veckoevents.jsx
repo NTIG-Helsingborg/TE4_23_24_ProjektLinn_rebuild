@@ -1,9 +1,9 @@
 import "react";
 
-const size = "1x2";
+const size = "1x2"; //Size for layout purposes. Later it should be getting this from the Database
 
 export const Veckoevents = () => {
-  if (size === "1x1") {
+  if (size === "1x1") { //Widget layouts are returned depending on their size in grid
     return (
       <>
         <div className="bg-red-900 aspect-square">
@@ -157,7 +157,7 @@ export const Veckoevents = () => {
         </div>
       </>
     );
-  } else {
+  } else { //If size is something else than set size, display error!
     return (
       <>
         <h1>Something went wrong, gridsize does not exist</h1>
