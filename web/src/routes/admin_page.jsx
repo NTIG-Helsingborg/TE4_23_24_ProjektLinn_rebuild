@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { EditContainer } from "../components/DisplayContainer";
-import { SlideObject } from "../components/SlideObject";
-import { useSlides } from "../lib/hooks/useSlides";
-import { useNewSlide } from "../lib/hooks/useSlides";
+import { EditContainer } from "../components/DisplayContainer"; // Gemensamma container som används för att visa och editera slides
+import { PopUpTimer } from "../components/PopUpTimer"; // Fixa styling på det och sägg till att den ska bete sig som en popup
+import { SlideObject } from "../components/SlideObject"; // Component som representerar en slide
+import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
+import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
 import {
   Layout1SVG,
   Layout2SVG,
   Layout3SVG,
 } from "../assets/layoutPreviews/layoutSVGs";
-// import { SlideTimer } from "../components/SlideTimer";
 
 export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
@@ -47,7 +47,7 @@ export const AdminPage = () => {
             )}
           </div>
 
-          {/* Add Slide Button */}
+          {/* Add Slide Button. Sägg till att hitta ett sätt där man kan centrera add slide knappen när man ändrar res*/}
           <div
             id="AddSlideButton"
             className=" mb-6 w-[15vw] pr-10 bg-white flex justify-evenly"
@@ -88,19 +88,19 @@ export const AdminPage = () => {
           <div className="flex justify-center items-center z-10 fixed top-6 right-6 xl:w-[40vw] w-[30vw] h-[calc(100%-theme(space.12))] bg-white">
             <div className="grid gap-4 2xl:grid-cols-3 lg:grid-cols-3 grid-cols-2">
               <button
-                onClick={() => addSlide(0)}
+                onClick={() => addSlide()}
                 className="flex justify-center items-center w-[11vw] xl:w-[9vw] lg:w-[10vw] aspect-[9/16]"
               >
                 <Layout1SVG />
               </button>
               <button
-                onClick={() => addSlide(1)}
+                onClick={() => addSlide()}
                 className="flex justify-center items-center w-[11vw] xl:w-[9vw] lg:w-[10vw] aspect-[9/16]"
               >
                 <Layout2SVG />
               </button>
               <button
-                onClick={() => addSlide(2)}
+                onClick={() => addSlide()}
                 className="flex justify-center items-center w-[11vw] xl:w-[9vw] lg:w-[10vw] aspect-[9/16]"
               >
                 <Layout3SVG />

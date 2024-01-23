@@ -1,3 +1,5 @@
+// This timer is a component that is linked to slide timer only fix the syling and make sure the time is saved in the data base
+
 import React, { useState, useEffect } from "react";
 // @ts-ignore
 import ntiLogo from "../assets/ntiLogo.svg";

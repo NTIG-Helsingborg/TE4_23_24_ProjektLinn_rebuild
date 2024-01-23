@@ -8,6 +8,7 @@ import {
 } from "../assets/layoutPreviews/layoutSVGs";
 import { useState } from "react";
 
+/*  */
 export const SlideObject = ({ id }) => {
   const newDeleteFunc = useDeleteSlide();
   const [isDeleting, setIsDeleting] = useState(false);
