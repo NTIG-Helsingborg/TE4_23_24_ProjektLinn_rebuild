@@ -26,12 +26,14 @@ export const AdminPage = () => {
   return (
     <>
       <div className="flex h-[100vh] w-[100vw] p-6 justify-between">
+        
         {/* item-1 - Slidelist*/}
+        {/* 
         <div
           id="SlideList"
           className="flex flex-col w-[15vw] h-full justify-center"
         >
-          {/* Slides - card + buttons (del, timer)*/}
+          Slides - card + buttons (del, timer)
           <div id="SlideLayouts" className="overflow-y-scroll">
             {slides && slides.length > 0 ? (
               slides.map((slide) => (
@@ -47,7 +49,7 @@ export const AdminPage = () => {
             )}
           </div>
 
-          {/* Add Slide Button. Sägg till att hitta ett sätt där man kan centrera add slide knappen när man ändrar res*/}
+          Add Slide Button. Sägg till att hitta ett sätt där man kan centrera add slide knappen när man ändrar res
           <div
             id="AddSlideButton"
             className=" mb-6 w-[15vw] pr-10 bg-white flex justify-evenly"
@@ -73,7 +75,7 @@ export const AdminPage = () => {
               </svg>
             </button>
           </div>
-        </div>
+        </div>*/}
 
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
@@ -83,7 +85,7 @@ export const AdminPage = () => {
         {/* item-3 - Widget Editor */}
         <div className="xl:w-[40vw] w-[30vw] border"> Widgets = defult </div>
 
-        {/* Layout selector popup */}
+        {/* Layout selector popup 
         {layoutSelectToggle && (
           <div className="flex justify-center items-center z-10 fixed top-6 right-6 xl:w-[40vw] w-[30vw] h-[calc(100%-theme(space.12))] bg-white">
             <div className="grid gap-4 2xl:grid-cols-3 lg:grid-cols-3 grid-cols-2">
@@ -107,7 +109,7 @@ export const AdminPage = () => {
               </button>
             </div>
           </div>
-        )}
+        )}*/}
       </div>
     </>
   );
