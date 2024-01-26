@@ -34,7 +34,7 @@ export const AdminPage = () => {
           id="SlideList"
           className="flex flex-col w-[15vw] h-full justify-center"
         >
-          {/*</div>Slides - card + buttons (del, timer)*/}
+          Slides - card + buttons (del, timer)
           <div id="SlideLayouts" className="overflow-y-scroll">
             {slides && slides.length > 0 ? (
               slides.map((slide) => (
@@ -49,15 +49,6 @@ export const AdminPage = () => {
               <div className="mx-auto font-bold "> No Slides.. </div>
             )}
           </div>
-          </div>
-          {/*item-2 - Preview + Edit*/}
-          <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
-            <EditContainer />
-          </div>
-
-          {/* item-3 - Widget Editor */}
-          <div className="xl:w-[40vw] w-[30vw] border"> Widgets = defult </div>
-          {/* 
 
           Add Slide Button. Sägg till att hitta ett sätt där man kan centrera add slide knappen när man ändrar res
           <div
@@ -90,6 +81,7 @@ export const AdminPage = () => {
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
+          <Layout/>
         </div>
 
         {/* item-3 - Widget Editor */}
