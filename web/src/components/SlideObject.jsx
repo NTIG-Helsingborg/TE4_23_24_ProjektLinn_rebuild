@@ -24,9 +24,10 @@ export const SlideObject = ({ id }) => {
         <Layout1SVG />
       </div>
 
-      {/* Buttons - del + timer */}
+
+      {/* Buttons - del + timer 
       <div className="flex lg:flex-col gap-1 lg:mx-2 lg:my-0 my-2 justify-center items-center">
-        {/* Delete button */}
+        {/* Delete button 
         <button
           onClick={() => {
             setIsDeleting(true);
@@ -49,9 +50,9 @@ export const SlideObject = ({ id }) => {
           </svg>
         </button>
 
-        {/* Timer button */}
+        Timer button
         <PopUpTimer />
-      </div>
+      </div>*/}
     </>
   );
 };
