@@ -1,6 +1,6 @@
 import { DisplayContainer } from "../components/DisplayContainer";
 import { Veckoevents } from "../components/Veckoevents";
-import { TrafficWidget } from "../components/trafficWidget";
+import { TrafficWidget2x1,TrafficWidget1x1,TrafficWidget1x2 } from "../components/trafficWidget";
 import { SlideTimer } from "../components/SlideTimer";
 import { NewsArticleWidget } from "../components/NewsArticleWidget";
 //import { Insta } from "../components/Insta";
