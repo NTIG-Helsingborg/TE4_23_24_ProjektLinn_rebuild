@@ -121,13 +121,14 @@ const TrafficWidget = ({ data, size}) => {
     BussColor = "bg-red-500";
     Buss = "choose between 1-3 id";
   }
-  let widgetStyle = { width: "900px", height: "2000px", padding: "1%" };
+  
+  let widgetStyle = { width: "900px", height: "2000px"};
   if(size == "2x1"){
-    widgetStyle = { width: "2000px", height: "900px", padding: "1%" };
+    widgetStyle = { width: "2000px", height: "900px"};
   }else if(size == "1x2"){
-    widgetStyle = { width: "900px", height: "2000px", padding: "1%" };
+    widgetStyle = { width: "900px", height: "2000px"};
   }else if(size == "1x1"){
-    widgetStyle = { width: "900px", height: "900px", padding: "1%" };
+    widgetStyle = { width: "900px", height: "900px"};
   }
 
 return (
