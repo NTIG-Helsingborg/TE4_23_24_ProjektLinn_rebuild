@@ -4,6 +4,7 @@ import { PopUpTimer } from "../components/PopUpTimer"; // Fixa styling på det o
 import { SlideObject } from "../components/SlideObject"; // Component som representerar en slide
 import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
+import { Layout } from "../components/Layout";
 import {
   Layout1SVG,
   Layout2SVG,
@@ -28,7 +29,7 @@ export const AdminPage = () => {
       <div className="flex h-[100vh] w-[100vw] p-6 justify-between">
         
         {/* item-1 - Slidelist*/}
-        {/* 
+        
         <div
           id="SlideList"
           className="flex flex-col w-[15vw] h-full justify-center"
@@ -75,11 +76,12 @@ export const AdminPage = () => {
               </svg>
             </button>
           </div>
-        </div>*/}
+        </div>
 
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
+          <Layout/>
         </div>
 
         {/* item-3 - Widget Editor */}
