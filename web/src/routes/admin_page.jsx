@@ -34,7 +34,6 @@ export const AdminPage = () => {
           id="SlideList"
           className="flex flex-col w-[15vw] h-full justify-center"
         >
-          Slides - card + buttons (del, timer)
           <div id="SlideLayouts" className="overflow-y-scroll">
             {slides && slides.length > 0 ? (
               slides.map((slide) => (
@@ -49,7 +48,7 @@ export const AdminPage = () => {
               <div className="mx-auto font-bold "> No Slides.. </div>
             )}
           </div>
-
+           {/* 
           Add Slide Button. Sägg till att hitta ett sätt där man kan centrera add slide knappen när man ändrar res
           <div
             id="AddSlideButton"
@@ -75,8 +74,8 @@ export const AdminPage = () => {
                 <path d="M12 16V8" strokeWidth="1.5"></path>
               </svg>
             </button>
-          </div>
-        </div>
+          </div>*/}
+            </div>
 
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
