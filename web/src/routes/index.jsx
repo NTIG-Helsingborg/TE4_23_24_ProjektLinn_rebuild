@@ -3,7 +3,7 @@ import { Veckoevents } from "../components/Veckoevents";
 import { TrafficWidget2x1,TrafficWidget1x1,TrafficWidget1x2 } from "../components/trafficWidget";
 import { SlideTimer } from "../components/SlideTimer";
 import { NewsArticleWidget } from "../components/NewsArticleWidget";
-import { Insta } from "../components/Insta";
+//import { Insta } from "../components/Insta";
 import { CountdownWidget } from "../components/CountdownWidget";
 import { useMisc } from "../lib/hooks/useMisc";
 
@@ -13,7 +13,7 @@ export const RootRoute = () => {
   return (
     <>
      <DisplayContainer />
-
+      <Veckoevents />
     </>
   );
 };
