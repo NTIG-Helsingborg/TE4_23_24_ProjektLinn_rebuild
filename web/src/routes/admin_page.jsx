@@ -4,7 +4,7 @@ import { PopUpTimer } from "../components/PopUpTimer"; // Fixa styling på det o
 import { SlideObject } from "../components/SlideObject"; // Component som representerar en slide
 import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
-import { Layout } from "../components/Layout";
+import { Layout} from "../components/Layout";
 import {
   Layout1SVG,
   Layout2SVG,
@@ -15,6 +15,18 @@ export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
   const { data: slides } = useSlides();
   const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
+  const [logMessage, setLogMessage] = useState('');
+  const updateLogMessage = (message) => {
+    setLogMessage(message);
+  
+};
+
+const messageOptions = {
+  '1/1': 'Hello',
+  '1/2': 'Hej',
+  '2/1': 'Haaaaaaaaaj',
+  // Add more message options as needed
+};
 
   async function addSlide() {
     newSlideMutation.mutate({
@@ -80,7 +92,9 @@ export const AdminPage = () => {
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
-          <Layout/>
+          <p>{logMessage}</p>
+        <Layout updateLogMessage={updateLogMessage} messageOptions={messageOptions} />
+
         </div>
 
         {/* item-3 - Widget Editor */}
@@ -124,3 +138,6 @@ export const adminRoute = {
   path: "/admin",
   element: <AdminPage />,
 };
+
+
+
