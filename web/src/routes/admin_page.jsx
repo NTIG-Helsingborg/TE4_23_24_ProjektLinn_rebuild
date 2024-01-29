@@ -48,7 +48,7 @@ const messageOptions = {
     return widgets[layout] || [];
   }
 
-  const layout = "1x1";
+  const layout = "1x2";
   const widgets = getWidgets(layout);
 
   function handleWidgetClick(imagePath) {
@@ -132,10 +132,10 @@ const messageOptions = {
         </div>
 
         {/* item-3 - Widget Editor */}
-        <div className="xl:w-[40vw] w-[40vw] h-screen flex"> 
+        <div className="grid-cols-1 grid-rows-4 xl:w-[25vw] w-[40vw]  "> 
           {widgets.map((image, index) => (
-            <div key={index} className="w-full">
-              <img src={image} alt="widget" className="w-full h-auto object-contain" onClick={() => handleWidgetClick(image)} />    
+            <div key={index} className="w-full ">
+              <img src={image} alt="widget" className=" duration-100 cursor-pointer rounded-lg object-contain my-10 hover:scale-105 shadow-lg shadow-gray-200 " onClick={() => handleWidgetClick(image)} />    
             </div>
           ))} 
         </div>
