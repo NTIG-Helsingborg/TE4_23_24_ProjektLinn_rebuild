@@ -5,15 +5,12 @@ import { SlideObject } from "../components/SlideObject"; // Component som repres
 import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
 import { Layout } from "../components/Layout";
-import { CountdownWidget1x1,CountdownWidget1x2, CountdownWidget2x1 } from "../components/CountdownWidget";
-import { TrafficWidget1x1, TrafficWidget1x2, TrafficWidget2x1 } from "../components/trafficWidget";
-import { WeatherWidget1x2, WeatherWidget2x1 } from "../widgets/weatherWidget";
+import * as images from '../assets/widgetsShowcase/WidgetShowcase';
 import {
   Layout1SVG,
   Layout2SVG,
   Layout3SVG,
 } from "../assets/layoutPreviews/layoutSVGs";
-import { divId } from "../widgets/trafficWidget";
 
 export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
@@ -27,11 +24,13 @@ export const AdminPage = () => {
       interval: 30,
     });
   }
+    //Function that takes in a layout size and returns all widget that are compatible with the size
+
   function getWidgets(layout) {
     const widgets = {
-      "1x1": [ <TrafficWidget1x1 data={{divId:"stad"}} />,<TrafficWidget1x1 data={{divId:"region"}} />,<TrafficWidget1x1 data={{divId:"tåg"}} />],
-      "2x1": [ <TrafficWidget2x1 data={{divId:"stad"}} />,<TrafficWidget2x1 data={{divId:"stad"}} />,<TrafficWidget2x1 data={{divId:"stad"}} />, <WeatherWidget2x1 />],
-      "1x2": [ <TrafficWidget1x2 data={{divId:"stad"}} />,<TrafficWidget1x2 data={{divId:"stad"}} />,<TrafficWidget1x2 data={{divId:"stad"}} />, <WeatherWidget1x2 />]
+      "1x1": [images.CountDownWidget1x1, images.TrafficWidget1x1],
+      "2x1": [images.CountDownWidget2x1, images.TrafficWidget2x1, images.WeatherWidget2x1],
+      "1x2": [images.CountDownWidget1x2, images.TrafficWidget1x2, images.WeatherWidget1x2]
     };
   
     return widgets[layout] || [];
@@ -40,7 +39,12 @@ export const AdminPage = () => {
   const layout = "1x1";
   const widgets = getWidgets(layout);
 
-  //Function that takes in a layout size and returns all widget that are compatible with the size
+  function handleWidgetClick(imagePath) {
+    const widgetType = imagePath.split('/').pop().split('.')[0];
+    console.log(`Widget clicked: ${widgetType}`);
+    // Add your logic here
+  }
+
 
   
 
@@ -104,11 +108,13 @@ export const AdminPage = () => {
         </div>
 
         {/* item-3 - Widget Editor */}
-        <div className="xl:w-[40vw] w-[30vw] border"> {widgets.map((Widget, index) => (
-      <div key={index}>
-        {Widget}
-      </div>
-    ))} </div>
+        <div className="xl:w-[40vw] w-[40vw] h-screen flex"> 
+          {widgets.map((image, index) => (
+            <div key={index} className="w-full">
+              <img src={image} alt="widget" className="w-full h-auto object-contain" onClick={() => handleWidgetClick(image)} />    
+            </div>
+          ))} 
+        </div>
 
         {/* Layout selector popup 
         {layoutSelectToggle && (

@@ -6,14 +6,15 @@ import { NewsArticleWidget } from "../components/NewsArticleWidget";
 //import { Insta } from "../components/Insta";
 import { CountdownWidget1x1, CountdownWidget1x2, CountdownWidget2x1 } from "../components/CountdownWidget";
 import { useMisc } from "../lib/hooks/useMisc";
+import { WeatherWidget1x2,WeatherWidget2x1 } from "../widgets/weatherWidget";
 
 export const RootRoute = () => {
  
 
   return (
     <>
-     <DisplayContainer />
-   
+    <CountdownWidget1x2 data={{datetime:"2024-3-24"}} />
+    
     </>
   );
 };
