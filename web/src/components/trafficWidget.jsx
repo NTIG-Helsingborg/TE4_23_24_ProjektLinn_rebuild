@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import { useMisc } from "../lib/hooks/useMisc";
 
-export const TrafficWidget = ({ data }) => {
+const TrafficWidget = ({ data, size}) => {
 
     //get data from pocketbase and remake it to a const state
   const { divId, interval = 20000 } = data;
@@ -119,9 +121,18 @@ export const TrafficWidget = ({ data }) => {
     BussColor = "bg-red-500";
     Buss = "choose between 1-3 id";
   }
+  
+  let widgetStyle = { width: "900px", height: "2000px"};
+  if(size == "2x1"){
+    widgetStyle = { width: "2000px", height: "900px"};
+  }else if(size == "1x2"){
+    widgetStyle = { width: "900px", height: "2000px"};
+  }else if(size == "1x1"){
+    widgetStyle = { width: "900px", height: "900px"};
+  }
 
 return (
-    <div className="rounded-xl bg-[#D9D9D9] h-full overflow-hidden border-2  text-black  border-black text-xl">
+    <div className="rounded-xl bg-[#D9D9D9] h-full overflow-hidden border-2  text-black  border-black text-xl" style={widgetStyle}>
         {/* Widget Header */}
         <div className="grid grid-flow-col overflow-hidden text-5xl">
             <div className="my-10 mx-6">
@@ -184,8 +195,16 @@ return (
         </table>
     </div>
 );
-            };
-
+};
+export const TrafficWidget2x1 = ({ data }) => {
+  return <TrafficWidget data={data} size="2x1" />;
+}
+export const TrafficWidget1x2 = ({ data }) => {
+  return <TrafficWidget data={data} size="1x2" />;
+}
+export const TrafficWidget1x1 = ({ data }) => {
+  return <TrafficWidget data={data} size="1x1" />;
+}
 /**
   return (
     data &&
