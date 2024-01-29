@@ -48,7 +48,7 @@ const messageOptions = {
     return widgets[layout] || [];
   }
 
-  const layout = "1x2";
+  const layout = "1x1";
   const widgets = getWidgets(layout);
 
   function handleWidgetClick(imagePath) {
