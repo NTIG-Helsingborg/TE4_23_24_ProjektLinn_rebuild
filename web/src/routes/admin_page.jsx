@@ -42,7 +42,17 @@ export const AdminPage = () => {
   function handleWidgetClick(imagePath) {
     const widgetType = imagePath.split('/').pop().split('.')[0];
     console.log(`Widget clicked: ${widgetType}`);
-    // Add your logic here
+    // if (widgetType === "CountDownWidget1x1")  ask user to input a date
+    if(widgetType === "CountdownWidget1x1" || widgetType === "CountdownWidget1x2" || widgetType === "CountdownWidget2x1"){
+      const date = prompt("Please input a date in the format YYYY-MM-DD");
+      console.log(`Date entered: ${date}`);
+
+      if(date != null){
+        //Add the widget to the corresponding div
+
+        //Save the information to the database
+      }
+    }
   }
 
 
