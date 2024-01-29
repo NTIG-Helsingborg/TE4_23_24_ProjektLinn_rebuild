@@ -4,7 +4,8 @@ import { PopUpTimer } from "../components/PopUpTimer"; // Fixa styling på det o
 import { SlideObject } from "../components/SlideObject"; // Component som representerar en slide
 import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
-import { Layout} from "../components/Layout";
+import { Layout } from "../components/Layout";
+import * as images from '../assets/widgetsShowcase/WidgetShowcase';
 import {
   Layout1SVG,
   Layout2SVG,
@@ -35,6 +36,29 @@ const messageOptions = {
       interval: 30,
     });
   }
+    //Function that takes in a layout size and returns all widget that are compatible with the size
+
+  function getWidgets(layout) {
+    const widgets = {
+      "1x1": [images.CountDownWidget1x1, images.TrafficWidget1x1],
+      "2x1": [images.CountDownWidget2x1, images.TrafficWidget2x1, images.WeatherWidget2x1],
+      "1x2": [images.CountDownWidget1x2, images.TrafficWidget1x2, images.WeatherWidget1x2]
+    };
+  
+    return widgets[layout] || [];
+  }
+
+  const layout = "1x1";
+  const widgets = getWidgets(layout);
+
+  function handleWidgetClick(imagePath) {
+    const widgetType = imagePath.split('/').pop().split('.')[0];
+    console.log(`Widget clicked: ${widgetType}`);
+    // Add your logic here
+  }
+
+
+  
 
   return (
     <>
@@ -98,7 +122,13 @@ const messageOptions = {
         </div>
 
         {/* item-3 - Widget Editor */}
-        <div className="xl:w-[40vw] w-[30vw] border"> Widgets = defult </div>
+        <div className="xl:w-[40vw] w-[40vw] h-screen flex"> 
+          {widgets.map((image, index) => (
+            <div key={index} className="w-full">
+              <img src={image} alt="widget" className="w-full h-auto object-contain" onClick={() => handleWidgetClick(image)} />    
+            </div>
+          ))} 
+        </div>
 
         {/* Layout selector popup 
         {layoutSelectToggle && (

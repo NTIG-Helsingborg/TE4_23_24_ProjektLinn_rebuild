@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 // @ts-ignore
 import ntiLogo from "../assets/ntiLogo.svg";
 
-const size = "2x1"; //Size for layout purposes. Later it should be getting this from the Database
 
-export const CountdownWidget = ({ data }) => {
+const CountdownWidget = ({ data,size }) => {
   //tar emot key datatime och skapar ett Date object
   const { datetime } = data;
   const receivedDate = new Date(datetime);
@@ -30,7 +29,6 @@ export const CountdownWidget = ({ data }) => {
     const dateNow = new Date();
     const timeDifference = receivedDate - dateNow;
 
-    console.log(receivedDate);
     //converterar till dagar, timmar osv
     const calculatedDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const calculatedHours = Math.floor(
@@ -53,6 +51,8 @@ export const CountdownWidget = ({ data }) => {
     setMinutesLeft(formattedMinutes);
     setSecondsLeft(formattedSeconds);
   }
+
+
 
   if (size === "1x1") {
     //Widget layouts are returned depending on their size in grid
@@ -176,3 +176,13 @@ export const CountdownWidget = ({ data }) => {
     );
   }
 };
+
+export const CountdownWidget2x1 = ({ data }) => {
+  return <CountdownWidget data={data} size="2x1" />;
+}
+export const CountdownWidget1x2 = ({ data }) => {
+  return <CountdownWidget data={data} size="1x2" />;
+}
+export const CountdownWidget1x1 = ({ data }) => {
+  return <CountdownWidget data={data} size="1x1" />;
+}

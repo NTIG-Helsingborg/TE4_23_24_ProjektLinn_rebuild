@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
-import { CountdownWidget } from "./CountdownWidget";
 
 /* All widgets */
 export const widgets = {
-  countdown: CountdownWidget,
 };
 
 /* Base component for all widgets */
