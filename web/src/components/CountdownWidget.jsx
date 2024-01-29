@@ -4,9 +4,8 @@ import React, { useState, useEffect } from "react";
 // @ts-ignore
 import ntiLogo from "../assets/ntiLogo.svg";
 
-const size = "2x1"; //Size for layout purposes. Later it should be getting this from the Database
 
-export const CountdownWidget = ({ data }) => {
+const CountdownWidget = ({ data,size }) => {
   //tar emot key datatime och skapar ett Date object
   const { datetime } = data;
   const receivedDate = new Date(datetime);
@@ -176,3 +175,13 @@ export const CountdownWidget = ({ data }) => {
     );
   }
 };
+
+export const CountdownWidget2x1 = ({ data }) => {
+  return <CountdownWidget data={data} size="2x1" />;
+}
+export const CountdownWidget1x2 = ({ data }) => {
+  return <CountdownWidget data={data} size="1x2" />;
+}
+export const CountdownWidget1x1 = ({ data }) => {
+  return <CountdownWidget data={data} size="1x1" />;
+}

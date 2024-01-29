@@ -4,7 +4,7 @@ import { TrafficWidget2x1,TrafficWidget1x1,TrafficWidget1x2 } from "../component
 import { SlideTimer } from "../components/SlideTimer";
 import { NewsArticleWidget } from "../components/NewsArticleWidget";
 //import { Insta } from "../components/Insta";
-import { CountdownWidget } from "../components/CountdownWidget";
+import { CountdownWidget1x1, CountdownWidget1x2, CountdownWidget2x1 } from "../components/CountdownWidget";
 import { useMisc } from "../lib/hooks/useMisc";
 
 export const RootRoute = () => {
@@ -13,7 +13,7 @@ export const RootRoute = () => {
   return (
     <>
      <DisplayContainer />
-      <Veckoevents />
+   
     </>
   );
 };
