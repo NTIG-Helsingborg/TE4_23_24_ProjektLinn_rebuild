@@ -29,7 +29,6 @@ const CountdownWidget = ({ data,size }) => {
     const dateNow = new Date();
     const timeDifference = receivedDate - dateNow;
 
-    console.log(receivedDate);
     //converterar till dagar, timmar osv
     const calculatedDays = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const calculatedHours = Math.floor(
@@ -52,6 +51,8 @@ const CountdownWidget = ({ data,size }) => {
     setMinutesLeft(formattedMinutes);
     setSecondsLeft(formattedSeconds);
   }
+
+
 
   if (size === "1x1") {
     //Widget layouts are returned depending on their size in grid
