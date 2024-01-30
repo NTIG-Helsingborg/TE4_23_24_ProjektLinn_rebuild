@@ -17,11 +17,26 @@ export const AdminPage = () => {
   const { data: slides } = useSlides();
   const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
   const [widgets, setWidgets] = useState([]);
-  const updateFilterWidget = (message) => {
-    console.log(message);
-    const layout = message;
-    setWidgets(getWidgets(layout));
-};
+  const [currDiv, setCurrDiv] = useState(null); // [div1, div2, div3, div4]
+  const [divImages, setDivImages] = useState({
+    div1: null,
+    div2: null,
+    div3: null,
+    div4: null,
+  });
+
+  
+
+  const updateFilterWidget = (size,divId) => {
+    setWidgets(getWidgets(size));
+    setCurrDiv(divId);
+  };
+  const updateDivImage = (imagePath) =>{
+    setDivImages(prevImages => ({
+      ...prevImages,
+      [currDiv]: imagePath,
+    }));
+  }
 
 
 
@@ -34,14 +49,14 @@ export const AdminPage = () => {
   }
     //Function that takes in a layout size and returns all widget that are compatible with the size
 
-  function getWidgets(layout) {
+  function getWidgets(size) {
     const widgets = {
       "1x1": [images.CountDownWidget1x1, images.TrafficWidget1x1],
       "2x1": [images.CountDownWidget2x1, images.TrafficWidget2x1, images.WeatherWidget2x1],
       "1x2": [images.CountDownWidget1x2, images.TrafficWidget1x2, images.WeatherWidget1x2]
     };
   
-    return widgets[layout] || [];
+    return widgets[size] || [];
   }
 
   
@@ -57,11 +72,16 @@ export const AdminPage = () => {
       if(date != null){
         //Add the widget to the corresponding div
 
+
         //Save the information to the database
       }
     }
-  }
+    console.log(imagePath);
+    updateDivImage(imagePath);
+    
 
+  }
+  console.log(divImages);
 
   
 
@@ -121,7 +141,7 @@ export const AdminPage = () => {
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
-          <Layout updateFilterWidget={updateFilterWidget} />
+          <Layout updateFilterWidget={updateFilterWidget} divImages={divImages}/>
 
         </div>
 
