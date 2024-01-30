@@ -3,6 +3,7 @@ import {
     ExpandedModel,
     LayoutItem,
     Slide2,
+    Slide2Update,
     StrictRecordModel,
     Widget2,
     usePocketbase,
@@ -17,10 +18,10 @@ export const useSlides = () => {
     const pbClient = usePocketbase();
 
     const data = useQuery({
-        queryKey: ["slides"],
+        queryKey: ["slides2"],
         queryFn: async () => {
             const slides = await pbClient
-                .collection("slides")
+                .collection("slides2")
                 .getFullList();
 
             return slides;
@@ -42,13 +43,13 @@ export const useNewSlide = () => {
     const data = useMutation({
         mutationFn: async (slide: Omit<Slide2, keyof StrictRecordModel> ) => {
             const newSlide = await pbClient
-                .collection("slides")
+                .collection("slides2")
                 .create(slide);
 
             return newSlide;
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['slides'] })
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
         },
     });
     return data;
@@ -61,11 +62,31 @@ export const useDeleteSlide = () => {
     const data = useMutation({
         mutationFn: async (slideID: string) => {
             await pbClient
-                .collection('slides')
+                .collection('slides2')
                 .delete(slideID);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['slides'] })
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
+        },
+    });
+
+    return data;
+};
+
+export const useUpdateSlide = () => {
+    const pbClient = usePocketbase();
+    const queryClient = useQueryClient()
+
+    const data = useMutation({
+        mutationFn: async (slide: Slide2Update ) => {
+            let slide2:Omit<Slide2Update, "id"> = slide;
+            
+            await pbClient
+                .collection('slides2')
+                .update(slide.id, slide2);
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
         },
     });
 

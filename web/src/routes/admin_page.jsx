@@ -5,6 +5,7 @@ import { SlideObject } from "../components/SlideObject"; // Component som repres
 import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
 import { Layout } from "../components/Layout";
+import { useNewWidgets } from "../lib/hooks/useWidgets";
 import * as images from '../assets/widgetsShowcase/WidgetShowcase';
 import {
   Layout1SVG,
@@ -14,11 +15,18 @@ import {
 
 export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
+  const newWidgetMutation = useNewWidgets();
   const { data: slides } = useSlides();
   const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
   const [widgets, setWidgets] = useState([]);
   const [currDiv, setCurrDiv] = useState(null); // [div1, div2, div3, div4]
   const [divImages, setDivImages] = useState({
+    div1: null,
+    div2: null,
+    div3: null,
+    div4: null,
+  });
+  const [widgetID, setWidgetID] = useState({
     div1: null,
     div2: null,
     div3: null,
@@ -42,9 +50,29 @@ export const AdminPage = () => {
 
   async function addSlide() {
     newSlideMutation.mutate({
-      layout: null,
       index: 0,
       interval: 30,
+      widget_one: widgetID.div1,
+      widget_two: widgetID.div2,
+      widget_three: widgetID.div3,
+      widget_four: widgetID.div4
+    });
+  }
+  async function addWidget(_type, _data){
+    newWidgetMutation.mutate({
+      type: _type,
+      data: _data
+    }, {
+      onSuccess: (value) => {
+        console.log("Widget added", value);
+        setWidgetID(prevIDs => ({
+          ...prevIDs,
+          [currDiv]: value.id,
+        }));
+      },
+      onError: () => {
+        console.log("Widget failed to add");
+      }
     });
   }
     //Function that takes in a layout size and returns all widget that are compatible with the size
@@ -64,25 +92,30 @@ export const AdminPage = () => {
   function handleWidgetClick(imagePath) {
     const widgetType = imagePath.split('/').pop().split('.')[0];
     console.log(`Widget clicked: ${widgetType}`);
+    let data;
     // if (widgetType === "CountDownWidget1x1")  ask user to input a date
-    if(widgetType === "CountdownWidget1x1" || widgetType === "CountdownWidget1x2" || widgetType === "CountdownWidget2x1"){
+    if(widgetType === "CountDownWidget1x1" || widgetType === "CountDownWidget1x2" || widgetType === "CountDownWidget2x1"){
       const date = prompt("Please input a date in the format YYYY-MM-DD");
       console.log(`Date entered: ${date}`);
 
       if(date != null){
         //Add the widget to the corresponding div
+        data = {datetime:date};
 
+      }
+    }else  if(widgetType === "TrafficWidget1x1" || widgetType === "TrafficWidget1x2" || widgetType === "TrafficWidget2x1"){
+      const value = prompt("Please input a date a values: [stad, region, tåg, rotatera]");
 
-        //Save the information to the database
+      if(value != null){
+        data = {divId:value};
       }
     }
-    console.log(imagePath);
+    addWidget(widgetType, JSON.stringify(data));
     updateDivImage(imagePath);
     
 
   }
-  console.log(divImages);
-
+console.log(widgetID);
   
 
   return (
@@ -140,6 +173,7 @@ export const AdminPage = () => {
 
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
+          <button onClick={() => addSlide()}>SAVE</button>
           <EditContainer />
           <Layout updateFilterWidget={updateFilterWidget} divImages={divImages}/>
 
