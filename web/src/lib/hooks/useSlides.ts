@@ -20,7 +20,7 @@ export const useSlides = () => {
         queryKey: ["slides"],
         queryFn: async () => {
             const slides = await pbClient
-                .collection("slides")
+                .collection("slides2")
                 .getFullList();
 
             return slides;
@@ -42,7 +42,7 @@ export const useNewSlide = () => {
     const data = useMutation({
         mutationFn: async (slide: Omit<Slide2, keyof StrictRecordModel> ) => {
             const newSlide = await pbClient
-                .collection("slides")
+                .collection("slides2")
                 .create(slide);
 
             return newSlide;
@@ -61,7 +61,7 @@ export const useDeleteSlide = () => {
     const data = useMutation({
         mutationFn: async (slideID: string) => {
             await pbClient
-                .collection('slides')
+                .collection('slides2')
                 .delete(slideID);
         },
         onSuccess: () => {
