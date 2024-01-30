@@ -6,7 +6,6 @@ export const Layout = ({ updateFilterWidget,divImages }) => {
       updateFilterWidget(size,divID);
     };
 
-    console.log(divImages);
     <img src={divImages.div1} alt="widget" className="w-full h-auto object-contain cursor-pointer" />
     return (
         <div className="grid grid-cols-2 grid-rows-3 gap-2 mx-8">

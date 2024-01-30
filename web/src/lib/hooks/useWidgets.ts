@@ -45,10 +45,11 @@ export const useNewWidgets = () => {
                 .collection("widgets2")
                 .create(widget);
 
-            return newWidget;
+            return newWidget
         },
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['widgets2'] })
+          console.log("success");
         },
     });
     return data;
