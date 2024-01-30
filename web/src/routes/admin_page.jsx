@@ -16,18 +16,14 @@ export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
   const { data: slides } = useSlides();
   const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
-  const [logMessage, setLogMessage] = useState('');
-  const updateLogMessage = (message) => {
-    setLogMessage(message);
-  
+  const [widgets, setWidgets] = useState([]);
+  const updateFilterWidget = (message) => {
+    console.log(message);
+    const layout = message;
+    setWidgets(getWidgets(layout));
 };
 
-const messageOptions = {
-  '1/1': 'Hello',
-  '1/2': 'Hej',
-  '2/1': 'Haaaaaaaaaj',
-  // Add more message options as needed
-};
+
 
   async function addSlide() {
     newSlideMutation.mutate({
@@ -48,8 +44,7 @@ const messageOptions = {
     return widgets[layout] || [];
   }
 
-  const layout = "1x1";
-  const widgets = getWidgets(layout);
+  
 
   function handleWidgetClick(imagePath) {
     const widgetType = imagePath.split('/').pop().split('.')[0];
@@ -126,18 +121,21 @@ const messageOptions = {
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
           <EditContainer />
-          <p>{logMessage}</p>
-        <Layout updateLogMessage={updateLogMessage} messageOptions={messageOptions} />
+          <Layout updateFilterWidget={updateFilterWidget} />
 
         </div>
 
         {/* item-3 - Widget Editor */}
-        <div className="grid-cols-1 grid-rows-4 xl:w-[25vw] w-[40vw]  "> 
-          {widgets.map((image, index) => (
-            <div key={index} className="w-full ">
-              <img src={image} alt="widget" className=" duration-100 cursor-pointer rounded-lg object-contain my-10 hover:scale-105 shadow-lg shadow-gray-200 " onClick={() => handleWidgetClick(image)} />    
-            </div>
-          ))} 
+        <div className="xl:w-[40vw] w-[40vw] h-screen flex"> 
+          {widgets?.length > 0 ? (
+            widgets.map((image, index) => (
+              <div key={index} className="w-full">
+                <img src={image} alt="widget" className="w-full h-auto object-contain" onClick={() => handleWidgetClick(image)} />    
+              </div>
+            ))
+          ) : (
+            <p>Choose a container</p>
+          )}
         </div>
 
         {/* Layout selector popup 
