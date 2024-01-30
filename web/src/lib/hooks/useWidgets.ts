@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
     ExpandedModel,
     LayoutItem,
-    Widget,
+    Widget2,
     usePocketbase,
 } from "../../components/PocketbaseProvider";
 
@@ -20,7 +20,7 @@ export const useWidgets = (slideId: string) => {
         queryFn: async () => {
             const widgets = await pbClient
                 .collection("widgets")
-                .getFullList<ExpandedModel<Widget, {
+                .getFullList<ExpandedModel<Widget2, {
                     slot: LayoutItem;
                 }>>({
                     expand: "slot",
