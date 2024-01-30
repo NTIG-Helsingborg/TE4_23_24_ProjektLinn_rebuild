@@ -56,6 +56,19 @@ export interface Slide2<Expand extends _Expand = undefined> extends StrictRecord
 }
 
 /**
+ * Represents a slide record model.
+ */
+export interface Slide2Update {
+    id: string,
+    index: number;
+    interval: number;
+    widget_one: string;
+    widget_two: string;
+    widget_three: string;
+    widget_four: string;
+}
+
+/**
  * Represents a widget record model.
  */
 export interface Widget<Expand extends _Expand = undefined> extends StrictRecordModel<Expand> {

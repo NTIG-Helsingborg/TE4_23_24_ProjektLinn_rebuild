@@ -3,6 +3,7 @@ import {
     ExpandedModel,
     LayoutItem,
     Slide2,
+    Slide2Update,
     StrictRecordModel,
     Widget2,
     usePocketbase,
@@ -63,6 +64,26 @@ export const useDeleteSlide = () => {
             await pbClient
                 .collection('slides2')
                 .delete(slideID);
+        },
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
+        },
+    });
+
+    return data;
+};
+
+export const useUpdateSlide = () => {
+    const pbClient = usePocketbase();
+    const queryClient = useQueryClient()
+
+    const data = useMutation({
+        mutationFn: async (slide: Slide2Update ) => {
+            let slide2:Omit<Slide2Update, "id"> = slide;
+            
+            await pbClient
+                .collection('slides2')
+                .update(slide.id, slide2);
         },
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['slides2'] })
