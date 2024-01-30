@@ -22,7 +22,8 @@ export const useSlides = () => {
         queryFn: async () => {
             const slides = await pbClient
                 .collection("slides2")
-                .getFullList();
+                .getFullList({ expand: "widgets"});
+            console.log(69,slides);
 
             return slides;
         },

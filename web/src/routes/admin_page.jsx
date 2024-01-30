@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { EditContainer } from "../components/DisplayContainer"; // Gemensamma container som används för att visa och editera slides
 import { PopUpTimer } from "../components/PopUpTimer"; // Fixa styling på det och sägg till att den ska bete sig som en popup
 import { SlideObject } from "../components/SlideObject"; // Component som representerar en slide
-import { useSlides } from "../lib/hooks/useSlides"; // Backend hook
+import { useSlides, useUpdateSlide } from "../lib/hooks/useSlides"; // Backend hook
 import { useNewSlide } from "../lib/hooks/useSlides"; // Backned hook
 import { Layout } from "../components/Layout";
 import { useNewWidgets } from "../lib/hooks/useWidgets";
@@ -16,6 +16,7 @@ import {
 export const AdminPage = () => {
   const newSlideMutation = useNewSlide();
   const newWidgetMutation = useNewWidgets();
+  const updateSlideMutation = useUpdateSlide();
   const { data: slides } = useSlides();
   const [layoutSelectToggle, setlayoutSelectToggle] = useState(false);
   const [widgets, setWidgets] = useState([]);
@@ -27,10 +28,10 @@ export const AdminPage = () => {
     div4: null,
   });
   const [widgetID, setWidgetID] = useState({
-    div1: null,
-    div2: null,
-    div3: null,
-    div4: null,
+    div1: '0',
+    div2: '0',
+    div3: '0',
+    div4: '0',
   });
 
   
@@ -45,17 +46,37 @@ export const AdminPage = () => {
       [currDiv]: imagePath,
     }));
   }
-
+  const updateSlide = () =>{
+    updateSlideMutation.mutate({
+      id:"efywfmp2jb4n5o1",
+      index: 0,
+      interval: 30,
+      widgets: [widgetID.div1,widgetID.div2,widgetID.div3,widgetID.div4]
+    }, {
+      onSuccess: (value) => {
+        console.log("Slide added", value);
+      },
+      onError: (errValue) => {
+        console.log("Slide failed to add",errValue);
+      }
+    });
+  }
 
 
   async function addSlide() {
+    console.log("Adding slide");
     newSlideMutation.mutate({
       index: 0,
       interval: 30,
-      widget_one: widgetID.div1,
-      widget_two: widgetID.div2,
-      widget_three: widgetID.div3,
-      widget_four: widgetID.div4
+      widgets: [widgetID.div1,widgetID.div2,widgetID.div3,widgetID.div4]
+
+    }, {
+      onSuccess: (value) => {
+        console.log("Slide added", value);
+      },
+      onError: (errValue) => {
+        console.log("Slide failed to add",errValue);
+      }
     });
   }
   async function addWidget(_type, _data){
@@ -173,7 +194,7 @@ console.log(widgetID);
 
         {/*item-2 - Preview + Edit*/}
         <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
-          <button onClick={() => addSlide()}>SAVE</button>
+          <button onClick={() => updateSlide()}>SAVE</button>
           <EditContainer />
           <Layout updateFilterWidget={updateFilterWidget} divImages={divImages}/>
 

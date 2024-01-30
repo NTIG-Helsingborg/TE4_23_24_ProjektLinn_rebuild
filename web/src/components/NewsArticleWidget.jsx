@@ -31,7 +31,6 @@ export const NewsArticleWidget = () => {
                     <p>{item.description?._cdata}</p>
                     <p>{item.pubDate?._text}</p>
                     <img src={item?.enclosure?._attributes.url} alt="" />
-                    {console.log("XML Data: ", xmlData)}
                 </div>
             ))}
         </div>

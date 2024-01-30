@@ -83,18 +83,18 @@ export const useDeleteWidgets = () => {
  * @returns The mutation data for the widget.
  */
 
-export const useRetrieveWidget = () => {
+export const useRetrieveWidget = (widgetId) => {
     const pbClient = usePocketbase();
     const queryClient = useQueryClient()
 
-    const data = useMutation({
-        mutationFn: async (widgetID: string) => {
-            await pbClient
+    const data = useQuery({
+        queryKey: ["widget", widgetId],
+        queryFn: async () => {
+            const widget = await pbClient
                 .collection('widgets2')
-                .getOne(widgetID);
-        },
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['widgets2'] })
+                .getOne(widgetId);
+            console.log(widget);
+            return widget;
         },
     });
 

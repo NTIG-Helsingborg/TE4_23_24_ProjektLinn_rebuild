@@ -7,13 +7,16 @@ import { NewsArticleWidget } from "../components/NewsArticleWidget";
 import { CountdownWidget1x1, CountdownWidget1x2, CountdownWidget2x1 } from "../components/CountdownWidget";
 import { useMisc } from "../lib/hooks/useMisc";
 import { WeatherWidget1x2,WeatherWidget2x1 } from "../widgets/weatherWidget";
+import { LayoutPreview } from "../components/Layout";
+import { useSlides } from "../lib/hooks/useSlides";
 
 export const RootRoute = () => {
- 
+  const { data: slides } = useSlides();
 
   return (
     <>
-    <CountdownWidget1x2 data={{datetime:"2024-3-24"}} />
+    {/* @ts-ignore */}
+    <LayoutPreview widgets={slides && slides[0].expand.widgets}/>
     
     </>
   );
