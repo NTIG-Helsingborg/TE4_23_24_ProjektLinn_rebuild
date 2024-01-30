@@ -2,9 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
     ExpandedModel,
     LayoutItem,
-    Slide,
+    Slide2,
     StrictRecordModel,
-    Widget,
+    Widget2,
     usePocketbase,
 } from "../../components/PocketbaseProvider";
 
@@ -40,7 +40,7 @@ export const useNewSlide = () => {
     const queryClient = useQueryClient()
 
     const data = useMutation({
-        mutationFn: async (slide: Omit<Slide, keyof StrictRecordModel> ) => {
+        mutationFn: async (slide: Omit<Slide2, keyof StrictRecordModel> ) => {
             const newSlide = await pbClient
                 .collection("slides")
                 .create(slide);

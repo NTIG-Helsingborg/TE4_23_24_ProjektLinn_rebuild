@@ -44,10 +44,30 @@ export interface Slide<Expand extends _Expand = undefined> extends StrictRecordM
 }
 
 /**
+ * Represents a slide record model.
+ */
+export interface Slide2<Expand extends _Expand = undefined> extends StrictRecordModel<Expand> {
+    index: number;
+    interval: number;
+    widget_one: string;
+    widget_two: string;
+    widget_three: string;
+    widget_four: string;
+}
+
+/**
  * Represents a widget record model.
  */
 export interface Widget<Expand extends _Expand = undefined> extends StrictRecordModel<Expand> {
     slide: string;
+    type: string;
+    data: any;
+}
+
+/**
+ * Represents a widget record model.
+ */
+export interface Widget2<Expand extends _Expand = undefined> extends StrictRecordModel<Expand> {
     type: string;
     data: any;
 }
@@ -76,9 +96,13 @@ interface TypedPocketBase extends PocketBase {
     collection(idOrName: string): RecordService; // default fallback for any other collection
     collection(idOrName: "layouts"): RecordService<Layout>;
     collection(idOrName: "layout_items"): RecordService<LayoutItem>;
-    collection(idOrName: "slides"): RecordService<Slide>;
-    collection(idOrName: "widgets"): RecordService<Widget>;
+    collection(idOrName: "slides2"): RecordService<Slide2>;
+    collection(idOrName: "widgets2"): RecordService<Widget2>;
     collection(idOrName: "misc"): RecordService<Misc>;
+
+    // Old
+    // collection(idOrName: "slides"): RecordService<Slide>;
+    // collection(idOrName: "widgets"): RecordService<Widget>;
 }
 
 const pocketBaseClient = new PocketBase(
