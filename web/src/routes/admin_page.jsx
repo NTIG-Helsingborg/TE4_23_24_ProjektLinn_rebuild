@@ -42,9 +42,12 @@ export const AdminPage = () => {
 
   async function addSlide() {
     newSlideMutation.mutate({
-      layout: null,
       index: 0,
       interval: 30,
+      widget_one: null,
+      widget_two: null,
+      widget_three: null,
+      widget_four: null
     });
   }
     //Function that takes in a layout size and returns all widget that are compatible with the size
