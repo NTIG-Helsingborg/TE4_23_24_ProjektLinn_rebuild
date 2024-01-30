@@ -17,7 +17,7 @@ export const useSlides = () => {
     const pbClient = usePocketbase();
 
     const data = useQuery({
-        queryKey: ["slides"],
+        queryKey: ["slides2"],
         queryFn: async () => {
             const slides = await pbClient
                 .collection("slides2")
@@ -48,7 +48,7 @@ export const useNewSlide = () => {
             return newSlide;
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['slides'] })
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
         },
     });
     return data;
@@ -65,7 +65,7 @@ export const useDeleteSlide = () => {
                 .delete(slideID);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['slides'] })
+          queryClient.invalidateQueries({ queryKey: ['slides2'] })
         },
     });
 

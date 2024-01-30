@@ -16,7 +16,7 @@ export const useWidgets = () => {
     const pbClient = usePocketbase();
 
     const data = useQuery({
-        queryKey: ["widgets"],
+        queryKey: ["widgets2"],
         queryFn: async () => {
             const widgets = await pbClient
                 .collection("widgets2")
@@ -48,7 +48,7 @@ export const useNewWidgets = () => {
             return newWidget
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['widgets'] })
+          queryClient.invalidateQueries({ queryKey: ['widgets2'] })
           console.log("success");
         },
     });
@@ -71,7 +71,7 @@ export const useDeleteWidgets = () => {
                 .delete(widgetID);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['widgets'] })
+          queryClient.invalidateQueries({ queryKey: ['widgets2'] })
         },
     });
 
@@ -94,7 +94,7 @@ export const useRetrieveWidget = () => {
                 .getOne(widgetID);
         },
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['widgets'] })
+          queryClient.invalidateQueries({ queryKey: ['widgets2'] })
         },
     });
 
