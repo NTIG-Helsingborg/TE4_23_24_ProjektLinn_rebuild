@@ -172,7 +172,7 @@ console.log(widgetID);
             </div>
 
         {/*item-2 - Preview + Edit*/}
-        <div className="border-4 xl:w-[30vw] w-[40vw] max-h-full aspect-[9/16] my-auto rounded-[12px]">
+        <div className="border-4 xl:w-[30vw] w-[40vw]  aspect-[9/16] my-auto rounded-[12px]">
           <button className="bg-blue-500 m-3 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => addSlide()}>SAVE</button>
           <EditContainer />
           <Layout updateFilterWidget={updateFilterWidget} divImages={divImages}/>
